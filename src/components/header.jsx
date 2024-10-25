@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function Header() {
   return (
     <header className="shadow-md">
@@ -10,6 +12,7 @@ export default function Header() {
         <a href="" className="">
           my venues
         </a>
+        <Link to="/profilePage">my holidaze</Link>
       </nav>
     </div>
   </header>

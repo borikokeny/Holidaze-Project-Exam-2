@@ -1,5 +1,6 @@
-import Home from "./home"
+import Home from "./home";
+import ProfilePage from "./profilePage";
 
 export {
-  Home
+  Home, ProfilePage
 }
