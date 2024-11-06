@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import Logo from "../images/Logo.png";
 
 export default function Header() {
   return (
     <header className="shadow-md">
     <div className="container mx-auto flex justify-between items-center">
-      <a>logobogo</a>
+      <Link to="/"><img src={Logo} alt="Logo" /></Link>
       <nav className="space-x-4">
         <a href="" className="">
           my bookings
