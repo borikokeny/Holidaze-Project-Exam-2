@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../styles/index.css";
 import MainLayout from "../components/layout";
-import { Home, ProfilePage } from "../pages/index";
+import { Home, Venue, ProfilePage } from "../pages/index";
+
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
+          <Route path="venuePage/:venueId" element={<Venue />} />
           <Route path="profilePage" element={<ProfilePage />} />
         </Route>
       </Routes>
