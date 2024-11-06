@@ -18,6 +18,9 @@ function Venue() {
           throw new Error(`HTTP status ${response.status}`);
         }
         setVenue(jsonData.data);
+        console.log(jsonData.data);
+        
+        
       } catch (error) {
         console.error("Failed to fetch product:", error);
       }
