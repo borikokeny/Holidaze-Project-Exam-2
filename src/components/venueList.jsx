@@ -4,30 +4,28 @@ import Media from "./media";
 
 const VenueList = ({ venues }) => {
   return (
-    <div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
       {venues.map((venue) => {
         const { id, name, media, price, created } = venue;
 
         return (
           <div key={id}>
             <Link to={`/venuePage/${id}`}>
-            <div className="card w-96 bg-slate-400 rounded-lg overflow-hidden shadow-lg">
+            <div className="card w-60 bg-white rounded-lg overflow-hidden shadow-lg">
               <div className="image-container relative overflow-hidden">
               {media.length === 0 ? (
-                <img src="src\images\images.png" className="size-full block clip-custom bg-blue-500 p-4" />
+                <img src="src\images\images.png" className="w-64 h-48 block clip-custom" />
               ) : (
-                <Media key={media} media={media} />
+                <Media media={[media[0]]} />
               )}
-              </div>
-        
-            </div>
-              
-            </Link>
-            <div>
-              <h2>{name}</h2>
+              <div className="ms-6">
+                <h2>{name}</h2>
               <h3>{price} NOK / night</h3>
               <h4>{created}</h4>
-            </div>
+              </div>
+              </div>
+            </div> 
+            </Link>
           </div>
         );
       })}

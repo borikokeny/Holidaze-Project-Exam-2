@@ -36,7 +36,7 @@ const VenueCard = ({ venue }) => {
       <p>{meta.breakfast = true ? "Breakfast" : "NO Breakfast"}</p>
       <p>{meta.pets = true ? "Pets allowed" : "Sorry pets are not allowed"}</p>
       {media.length === 0 ? (
-        <img src="src\images\images.png" />
+        <img src="src\images\images.png" className="w-64"/>
       ) : (
         <Media key={media} media={media} />
       )}
