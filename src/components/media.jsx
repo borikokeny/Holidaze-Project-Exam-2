@@ -6,7 +6,7 @@ function Media({ media }) {
       {media.map((items, index) => {
         return (
           <div key={index}>
-          <img src={items.url} alt={items.name} className="w-96 h-48 object-cover transition-transform duration-300 hover:scale-105" />
+          <img src={items.url} alt={items.name} className="w-96 h-48 object-cover transition-transform duration-300 hover:scale-105 clip-custom" />
           </div>
         );
       })}
