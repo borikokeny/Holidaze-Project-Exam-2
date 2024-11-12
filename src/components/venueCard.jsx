@@ -38,7 +38,8 @@ const VenueCard = ({ venue }) => {
       {media.length === 0 ? (
         <img src="src\images\images.png" className="w-64"/>
       ) : (
-        <Media key={media} media={media} />
+     
+        <Media key={media} media={media} useClipCustom={false} />
       )}
     </div>
   );

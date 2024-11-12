@@ -17,6 +17,7 @@ const VenueList = ({ venues }) => {
                 <img src="src\images\images.png" className="w-64 h-48 block clip-custom" />
               ) : (
                 <Media media={[media[0]]} />
+
               )}
               <div className="ms-6">
                 <h2>{name}</h2>
