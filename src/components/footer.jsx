@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer>
-    <p>&copy; Borkok</p>
+    <p>&copy; Borkok 2024</p>
   </footer>
   )
 }
