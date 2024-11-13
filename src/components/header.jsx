@@ -13,7 +13,7 @@ export default function Header() {
         <a href="" className="">
           my venues
         </a>
-        <Link to="/profilePage">my holidaze</Link>
+        <Link to="/profilePage">Profile</Link>
       </nav>
     </div>
   </header>

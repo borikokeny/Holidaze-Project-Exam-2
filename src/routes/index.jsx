@@ -12,6 +12,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="venuePage/:venueId" element={<Venue />} />
           <Route path="profilePage" element={<ProfilePage />} />
+          <Route path="myVenues"  />
         </Route>
       </Routes>
     </BrowserRouter>
