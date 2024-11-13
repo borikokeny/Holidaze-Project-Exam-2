@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Media from "./media";
 import placeholderImage from "../images/Placeholder.jpg";
 import Ratings from "./ratings";
+import DatePicker from "react-datepicker";
 
-//*import Ratings
-//*import Reviews
+import "react-datepicker/dist/react-datepicker.css";
 
 const VenueCard = ({ venue }) => {
   const {
@@ -20,6 +20,7 @@ const VenueCard = ({ venue }) => {
     meta,
     location
   } = venue;
+  const [startDate, setStartDate] = useState(new Date());
 
   return (
     <div className="flex">
@@ -30,7 +31,7 @@ const VenueCard = ({ venue }) => {
           <>
             <Media
               media={[media[0]]}
-              className="w-full h-64 object-cover mb-4"
+              className="w-full h-64 object-cover mt-5 mb-4"
               useClipCustom={false}
             />
 
@@ -59,12 +60,12 @@ const VenueCard = ({ venue }) => {
         </div>
 
         <div className="w-3/5">
-          <h1 className="text-2xl font-bold">{name}</h1>
-          <h2 className="text-lg mb-3">{description}</h2>
+          <h1 className="mt-3 text-2xl font-bold text-stone-600">{name}</h1>
+          <h2 className="w-4/6 text-justify text-lg mt-3 mb-3 text-stone-600">{description}</h2>
           <Ratings />
-          <p className="font-bold mt-3">{price} NOK / night</p>
-          <p className="text-lg mb-3">Max guests: {maxGuests} person</p>
-          <p className="text-lg font-medium">This place offers:</p>
+          <p className="font-bold mt-3 text-stone-600">{price} NOK / night</p>
+          <p className="text-lg mb-3 text-stone-600">Max guests: {maxGuests} person</p>
+          <p className="text-lg font-medium text-stone-600">This place offers:</p>
           <div className="table-row">
           <p className="table-cell pe-2">{(meta.wifi = true ? "Wifi" : "NO Wifi")}</p>
           <p className="table-cell pe-2">{(meta.parking = true ? "Parking" : "NO Parking")}</p>
@@ -80,11 +81,8 @@ const VenueCard = ({ venue }) => {
           <p>{location.zip}</p>
           <p>{location.country}</p>
           <p>{location.continent}</p>
-
-          
-        
+          <DatePicker selected={startDate} onChange={(date) => setStartDate(date)}/>
         </div>
-      
     </div>
   );
 };

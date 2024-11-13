@@ -7,11 +7,11 @@ const Ratings = ({ rating }) => {
     return (
       <span key={index} rating={index}>
         {rating > index + 1 ? (
-          <TiStarFullOutline />
+          <TiStarFullOutline className="text-stone-600" />
         ) : rating > number ? (
-          <TiStarHalfOutline />
+          <TiStarHalfOutline className="text-stone-600" />
         ) : (
-          <TiStarOutline />
+          <TiStarOutline className="text-stone-600" />
         )}
       </span>
     );
