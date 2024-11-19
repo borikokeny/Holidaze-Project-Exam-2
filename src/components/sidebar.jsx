@@ -38,7 +38,13 @@ function Sidebar() {
           </Link>
         </li>
         <li>
-          <Link href="#" className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200">
+        <Link to="/auth/register" className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200">
+            Sign up
+          </Link>
+          <Link to="/auth/login" className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200">
+            Log in
+          </Link>
+          <Link to="/" className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200">
             Log out
           </Link>
         </li>

@@ -11,7 +11,7 @@ const VenueList = ({ venues }) => {
         return (
           <div key={id}>
             <Link to={`/venuePage/${id}`}>
-            <div className="card w-60 bg-white rounded-lg overflow-hidden shadow-lg">
+            <div className="card w-60 bg-white overflow-hidden shadow-lg">
               <div className="image-container relative overflow-hidden">
               {media.length === 0 ? (
                 <img src="src\images\images.png" className="w-64 h-48 block clip-custom" />

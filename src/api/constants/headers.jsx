@@ -1,4 +1,4 @@
-import { load } from "../storage";
+import { load } from "../../storage/index"
 
 export function headers() {
   const token = load("token");
@@ -8,11 +8,9 @@ export function headers() {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-   
   } else {
     return {
       "Content-Type": "application/json",
     };
   }
-
 }

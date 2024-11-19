@@ -19,15 +19,4 @@ function MainLayout() {
   );
 }
 
-// function MainLayout() {
-//   return (
-//     <div id="main-container" className="container mx-auto">
-//       <Header />
-//       <Sidebar />
-//       <Outlet />
-//       <Footer />
-//     </div>
-//   );
-// }
-
 export default MainLayout;
