@@ -18,7 +18,7 @@ function Sidebar() {
           />
         </div>
       </div>
-          <Link to="/profilePage" className="flex items-center p-2 ps-10 rounded-md hover:bg-gray-200">
+          <Link to="/profilePage" className="flex items-center p-2 ps-10 rounded-md text-gray-700 hover:bg-gray-200">
             My Profile
           </Link>
         </li>
