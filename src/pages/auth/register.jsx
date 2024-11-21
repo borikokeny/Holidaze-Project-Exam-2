@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../api/auth/register";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import Santorini from "../../images/Santorini.png";
 
 function RegisterForm() {
@@ -11,15 +11,31 @@ function RegisterForm() {
     password: "",
     banner: "",
     avatar: "",
-    venueManager: "",
+    venueManager: false,
     _count: "",
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const registerFormListener = (e) => {
+  const registerFormListener = async (e) => {
     e.preventDefault();
-    register(formData, setError, navigate);
+
+    const preparedData = {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      venueManager: formData.venueManager,
+      ...(formData.banner.trim() && { banner: { url: formData.banner } }), 
+      ...(formData.avatar.trim() && { avatar: { url: formData.avatar } }),
+    };
+
+    try {
+      console.log("Payload:", preparedData);
+      await register(preparedData);
+      navigate("/auth/login");
+    } catch (err) {
+      setError(err.message || "Something went wrong");
+    }
   };
 
   return (
@@ -33,6 +49,9 @@ function RegisterForm() {
             type="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            required
+            pattern="^[\w\s]+$"
+            title="Username can only contain upper and lower case letters, numbers and underscore. Example: myUser_123"
             placeholder="Name"
             className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
           />
@@ -42,6 +61,9 @@ function RegisterForm() {
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
+            required
+            pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
+            title="Only @(stud).noroff.no domains are allowed"
             placeholder="Email"
             className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
           />
@@ -51,11 +73,12 @@ function RegisterForm() {
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
             }
+            required
             placeholder="Password"
             className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
           />
           <input
-            type="banner"
+            type="url"
             value={formData.banner}
             onChange={(e) =>
               setFormData({ ...formData, banner: e.target.value })
@@ -64,7 +87,7 @@ function RegisterForm() {
             className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
           />
           <input
-            type="avatar"
+            type="url"
             value={formData.avatar}
             onChange={(e) =>
               setFormData({ ...formData, avatar: e.target.value })
@@ -76,7 +99,7 @@ function RegisterForm() {
             type="checkbox"
             value={formData.venueManager}
             onChange={(e) =>
-              setFormData({ ...formData, venueManager: e.target.value })
+              setFormData({ ...formData, venueManager: e.target.checked })
             }
           />
           <label className="text-gray-700"> I'm a venue manager YEAH</label>
@@ -88,6 +111,7 @@ function RegisterForm() {
               Sign in
             </button>
           </div>
+          {error && <p className="text-red-500">{error}</p>}
         </div>
       </form>
     </div>
