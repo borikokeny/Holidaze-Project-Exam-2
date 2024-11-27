@@ -1,8 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../styles/index.css";
 import MainLayout from "../components/layout";
-import { Home, Venue, ProfilePage, RegisterForm, LoginForm } from "../pages/index";
-
+import {
+  Home,
+  Venue,
+  ProfilePage,
+  RegisterForm,
+  LoginForm,
+} from "../pages/index";
 
 function App() {
   return (

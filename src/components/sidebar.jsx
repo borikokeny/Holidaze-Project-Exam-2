@@ -12,11 +12,11 @@ function Sidebar() {
               href="#"
               className="flex items-center p-2 ps-7 text-gray-900 no-underline hover:bg-gray-200 rounded-md"
             >
-              <img
+              {/* <img
                 src="https://github.com/mdo.png"
                 alt="User avatar"
                 className="w-8 h-8 rounded-full mr-3"
-              />
+              /> */}
             </div>
           </div>
           <Link

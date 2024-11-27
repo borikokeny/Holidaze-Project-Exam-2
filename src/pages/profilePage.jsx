@@ -12,6 +12,7 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState("");
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -37,6 +38,52 @@ export default function ProfilePage() {
     fetchProfile();
   }, []);
 
+  const openForm = () => {
+    setIsFormVisible((prev) => !prev);
+  };
+
+  const updateProfileListener = async (e) => {
+    e.preventDefault(); // Prevent form reload
+
+    try {
+      if (!avatarUrl) {
+        throw new Error("Avatar URL is required");
+      }
+
+      const profileName = profile.data.name;
+      if (!profileName) {
+        throw new Error("Profile name is missing");
+      }
+
+      // console.log("Updating profile with:", {
+      //   name: profileName,
+      //   avatar: { url: avatarUrl },
+      // });
+
+      const updatedProfile = await updateProfile({
+        name: profileName,
+        avatar: { url: avatarUrl },
+      });
+
+      // console.log("Updated profile data:", updatedProfile);
+
+      // Update the profile in state and hide the form
+      setProfile((prev) => ({
+        ...prev,
+        data: {
+          ...prev.data,
+          avatar: updatedProfile.data.avatar,
+        },
+      }));
+      setAvatarUrl(""); // Clear the input field
+      setIsFormVisible(false); // Hide the form
+      alert("Profile updated successfully!");
+    } catch (error) {
+      console.error("Failed to update profile:", error);
+      alert(error.message || "An error occurred while updating the profile.");
+    }
+  };
+
   if (loading) {
     return <div>Loading</div>;
   }
@@ -45,17 +92,13 @@ export default function ProfilePage() {
     return <div>Failed to load profile. Please try again later.</div>;
   }
 
-  const openForm = () => {
-    setIsFormVisible((prev) => !prev);
-  };
-
-  // Render profile page
   return (
     <div className="mb-11">
       <div className="flex flex-row items-center mb-12">
         <div className="w-60 place-items-center">
           <img
             src={profile.data.avatar.url}
+            alt="Avatar"
             className="object-cover rounded-full mt-6 w-60 h-60"
           />
         </div>
@@ -81,11 +124,13 @@ export default function ProfilePage() {
           </button>
           {isFormVisible && (
             <div>
-              <form action="">
+              <form onSubmit={updateProfileListener}>
                 <input
                   type="url"
                   placeholder="Add your new avatar url"
                   className="border p-2 me-3"
+                  value={avatarUrl}
+                  onChange={(e) => setAvatarUrl(e.target.value)} // Update state on input change
                   required
                 />
                 <button
@@ -120,32 +165,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-
-// function ProfilePage() {
-//   return (
-//     <div className="mb-11">
-//       <div className="mb-11">mdsfjs</div>
-//       <Link
-//         to="/myVenues"
-//         className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
-//       >
-//         My Venues
-//       </Link>
-//       <Link
-//         to="/myBookings"
-//         className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
-//       >
-//         My Bookings
-//       </Link>
-//       {/* ide egy modal kell az add a venue-hoz */}
-//       <Link
-//         to="/"
-//         className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
-//       >
-//         Add a Venue
-//       </Link>
-//     </div>
-//   );
-// }
-
-// export default ProfilePage;

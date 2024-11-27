@@ -28,7 +28,7 @@ export async function updateProfile(profileData) {
   }
   const response = await fetch(`${PROFILES_URL}/${profileData.name}`, {
     method: "PUT",
-    headers: headers(),
+    headers: headers(true),
     body: JSON.stringify(profileData)
   })
 
