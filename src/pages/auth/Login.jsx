@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import Mountains from "../../images/Mountains.png";
 
 function LoginForm() {
-  const {login: setUser} = useAuth();
+  const { login: setUser } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
@@ -15,7 +15,8 @@ function LoginForm() {
     try {
       const profile = await login(formData.email, formData.password);
       setUser(profile);
-      
+      location.assign("/");
+
       console.log("Login successful:", profile);
     } catch (err) {
       console.error("Login failed:", err);
