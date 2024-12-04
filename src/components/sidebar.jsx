@@ -70,6 +70,13 @@ function Sidebar() {
           >
             Log out
           </Link>
+          <Link
+            onClick={logout}
+            id="logOut"
+            className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
+          >
+            Upgrade to Manager
+          </Link>
         </li>
       </ul>
     </aside>
