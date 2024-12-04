@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { login } from "../../api/auth/login";
+import { useAuth } from "../../context/AuthContext";
 import Mountains from "../../images/Mountains.png";
 
 function LoginForm() {
+  const {login: setUser} = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
@@ -12,6 +14,8 @@ function LoginForm() {
 
     try {
       const profile = await login(formData.email, formData.password);
+      setUser(profile);
+      
       console.log("Login successful:", profile);
     } catch (err) {
       console.error("Login failed:", err);
