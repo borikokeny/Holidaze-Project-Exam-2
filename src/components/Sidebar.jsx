@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../api/auth/logout";
+import { useAuth } from "../context/AuthContext";
 
 function Sidebar() {
+  const { user } = useAuth();
   return (
     <aside className="flex flex-col flex-shrink-0 p-4 h-screen w-48">
       <ul className="flex flex-col space-y-2">
@@ -27,12 +29,14 @@ function Sidebar() {
           </Link>
         </li>
         <li>
-          <Link
-            href="#"
-            className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
-          >
-            My bookings
-          </Link>
+          {user && (
+            <Link
+              href="#"
+              className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
+            >
+              My bookings
+            </Link>
+          )}
         </li>
         <li>
           <a

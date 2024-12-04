@@ -7,6 +7,7 @@ import {
   MdOutlineCheckBoxOutlineBlank,
   MdOutlineModeEdit,
 } from "react-icons/md";
+import SomePage from "../components/Access";
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState(null);
@@ -103,6 +104,7 @@ export default function ProfilePage() {
           />
         </div>
         <div className="ms-6 mt-12">
+          <SomePage />
           <h1 className="text-2xl font-bold">{profile.data.name}</h1>
           <p className="font-bold">{profile.data.email}</p>
           <div className="flex">
