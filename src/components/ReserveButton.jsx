@@ -15,6 +15,11 @@ const ReserveButton = () => {
     }
   };
 
+  const handleLoginSuccess = () => {
+    setIsModalOpen(false); // Close the modal after successful login
+    alert("You are now logged in!");
+  };
+
   return (
     <>
       <button
@@ -28,7 +33,7 @@ const ReserveButton = () => {
         <Modal onClose={() => setIsModalOpen(false)}>
           <h2 className="text-lg font-bold">You need to be logged in</h2>
           <p className="mb-4">Please log in to reserve a venue.</p>
-          <LoginForm />
+          <LoginForm redirect={false} onLoginSuccess={handleLoginSuccess} />
           {/* <form>
             <input
               type="email"

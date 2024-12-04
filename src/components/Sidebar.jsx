@@ -55,25 +55,37 @@ function Sidebar() {
           </Link>
         </li>
         <li>
-          <Link
-            to="/auth/Register"
-            className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
-          >
-            Sign up
-          </Link>
-          <Link
-            to="/auth/Login"
-            className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
-          >
-            Log in
-          </Link>
-          <Link
-            onClick={logout}
-            id="logOut"
-            className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
-          >
-            Log out
-          </Link>
+          {!user && (
+            <Link
+              to="/auth/Register"
+              className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
+            >
+              Sign up
+            </Link>
+          )}
+        </li>
+        <li>
+          {!user && (
+            <Link
+              to="/auth/Login"
+              className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
+            >
+              Log in
+            </Link>
+          )}
+        </li>
+        <li>
+          {user && (
+            <Link
+              onClick={logout}
+              id="logOut"
+              className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
+            >
+              Log out
+            </Link>
+          )}
+        </li>
+        <li>
           <Link
             onClick={logout}
             id="logOut"
