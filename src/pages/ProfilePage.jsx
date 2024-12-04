@@ -145,13 +145,13 @@ export default function ProfilePage() {
         </div>
       </div>
       <Link
-        to="/myVenues"
+        to="/MyVenues"
         className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
       >
         My Venues
       </Link>
       <Link
-        to="/myBookings"
+        to="/MyBookings"
         className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
       >
         My Bookings

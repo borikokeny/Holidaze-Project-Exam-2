@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../images/Logo.jpg";
-import SearchBar from "./searchbar";
+import SearchBar from "./Searchbar";
 
 export default function Header({ searchValue, setSearchValue }) {
   return (

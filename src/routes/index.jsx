@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../styles/index.css";
-import MainLayout from "../components/layout";
+import MainLayout from "../components/Layout";
 import {
   Home,
   Venue,
@@ -15,11 +15,11 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
-          <Route path="venuePage/:venueId" element={<Venue />} />
-          <Route path="profilePage" element={<ProfilePage />} />
-          <Route path="myVenues" />
-          <Route path="auth/register" element={<RegisterForm />} />
-          <Route path="auth/login" element={<LoginForm />} />
+          <Route path="VenuePage/:venueId" element={<Venue />} />
+          <Route path="ProfilePage" element={<ProfilePage />} />
+          <Route path="MyVenues" />
+          <Route path="auth/Register" element={<RegisterForm />} />
+          <Route path="auth/Login" element={<LoginForm />} />
         </Route>
       </Routes>
     </BrowserRouter>

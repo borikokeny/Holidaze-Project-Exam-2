@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { VENUES_URL } from "../api/constants";
-import VenueCard from "../components/venueCard";
+import VenueCard from "../components/VenueCard";
 
 function Venue() {
   const { venueId } = useParams();

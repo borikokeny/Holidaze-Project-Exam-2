@@ -20,7 +20,7 @@ function Sidebar() {
             </div>
           </div>
           <Link
-            to="/profilePage"
+            to="/ProfilePage"
             className="flex items-center p-2 ps-10 rounded-md text-gray-700 hover:bg-gray-200"
           >
             My Profile
@@ -52,13 +52,13 @@ function Sidebar() {
         </li>
         <li>
           <Link
-            to="/auth/register"
+            to="/auth/Register"
             className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
           >
             Sign up
           </Link>
           <Link
-            to="/auth/login"
+            to="/auth/Login"
             className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
           >
             Log in
