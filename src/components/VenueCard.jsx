@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import ReserveButton from "./ReserveButton";
 import Media from "./media";
 import placeholderImage from "../images/Placeholder.jpg";
 import Ratings from "./ratings";
@@ -7,6 +9,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const VenueCard = ({ venue }) => {
+  const {user} = useAuth();
+  console.log("VenueCard user:", user);
+  
   const {
     id,
     name,
@@ -18,7 +23,7 @@ const VenueCard = ({ venue }) => {
     created,
     updated,
     meta,
-    location
+    location,
   } = venue;
   const [startDate, setStartDate] = useState(new Date());
 
@@ -36,7 +41,7 @@ const VenueCard = ({ venue }) => {
             />
 
             <div className="flex gap-2">
-            {media.slice(1, 4).map((image, index) => (
+              {media.slice(1, 4).map((image, index) => (
                 <Media
                   key={index}
                   media={[image]}
@@ -46,43 +51,60 @@ const VenueCard = ({ venue }) => {
                 />
               ))}
 
-              {Array(3 - media.slice(1, 4).length).fill().map((_, index) => (
-                <img
-                  key={`placeholder-${index}`}
-                  src={placeholderImage}
-                  className="w-1/4 h-36 object-cover"
-                  alt={`${name} placeholder`}
-                />
-              ))}
+              {Array(3 - media.slice(1, 4).length)
+                .fill()
+                .map((_, index) => (
+                  <img
+                    key={`placeholder-${index}`}
+                    src={placeholderImage}
+                    className="w-1/4 h-36 object-cover"
+                    alt={`${name} placeholder`}
+                  />
+                ))}
             </div>
           </>
         )}
-        </div>
+      </div>
 
-        <div className="w-3/5">
-          <h1 className="mt-3 text-2xl font-bold text-stone-600">{name}</h1>
-          <h2 className="w-4/6 text-justify text-lg mt-3 mb-3 text-stone-600">{description}</h2>
-          <Ratings />
-          <p className="font-bold mt-3 text-stone-600">{price} NOK / night</p>
-          <p className="text-lg mb-3 text-stone-600">Max guests: {maxGuests} person</p>
-          <p className="text-lg font-medium text-stone-600">This place offers:</p>
-          <div className="table-row">
-          <p className="table-cell pe-2">{(meta.wifi = true ? "Wifi" : "NO Wifi")}</p>
-          <p className="table-cell pe-2">{(meta.parking = true ? "Parking" : "NO Parking")}</p>
-          <p className="table-cell pe-2">{(meta.breakfast = true ? "Breakfast" : "NO Breakfast")}</p>
+      <div className="w-3/5">
+        <h1 className="mt-3 text-2xl font-bold text-stone-600">{name}</h1>
+        <h2 className="w-4/6 text-justify text-lg mt-3 mb-3 text-stone-600">
+          {description}
+        </h2>
+        <Ratings />
+        <p className="font-bold mt-3 text-stone-600">{price} NOK / night</p>
+        <p className="text-lg mb-3 text-stone-600">
+          Max guests: {maxGuests} person
+        </p>
+        <p className="text-lg font-medium text-stone-600">This place offers:</p>
+        <div className="table-row">
+          <p className="table-cell pe-2">
+            {(meta.wifi = true ? "Wifi" : "NO Wifi")}
+          </p>
+          <p className="table-cell pe-2">
+            {(meta.parking = true ? "Parking" : "NO Parking")}
+          </p>
+          <p className="table-cell pe-2">
+            {(meta.breakfast = true ? "Breakfast" : "NO Breakfast")}
+          </p>
           <p className="table-cell pe-2">
             {(meta.pets = true ? "Pets allowed" : "Sorry pets are not allowed")}
           </p>
-          </div>
-          
-          <p className="text-lg font-medium mt-3">Address: </p>
-          <p className="">{location.address}</p>
-          <p>{location.city}</p>
-          <p>{location.zip}</p>
-          <p>{location.country}</p>
-          <p>{location.continent}</p>
-          <DatePicker selected={startDate} onChange={(date) => setStartDate(date)}/>
         </div>
+
+        <p className="text-lg font-medium mt-3">Address: </p>
+        <p className="">{location.address}</p>
+        <p>{location.city}</p>
+        <p>{location.zip}</p>
+        <p>{location.country}</p>
+        <p>{location.continent}</p>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+        />
+        <ReserveButton />
+        {/* <button className="w-64 mt-2 rounded-none bg-sky-500 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60">Reserve</button> */}
+      </div>
     </div>
   );
 };
