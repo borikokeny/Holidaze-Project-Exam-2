@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../api/auth/logout";
 import { useAuth } from "../context/AuthContext";
+import ManagerButton from "./ManagerButton";
 
 function Sidebar() {
   const { user } = useAuth();
@@ -86,13 +87,14 @@ function Sidebar() {
           )}
         </li>
         <li>
-          <Link
-            onClick={logout}
+          <ManagerButton />
+          {/* <Link
+            // onClick={logout}
             id="logOut"
             className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
           >
             Upgrade to Manager
-          </Link>
+          </Link> */}
         </li>
       </ul>
     </aside>

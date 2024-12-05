@@ -21,8 +21,16 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const upgradeToManager = () => {
+    if (user) {
+      const updatedUser = { ...user, role: "manager" };
+      setUser(updatedUser);
+      localStorage.setItem("profile", JSON.stringify(updatedUser))
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, upgradeToManager }}>
       {children}
     </AuthContext.Provider>
   );
