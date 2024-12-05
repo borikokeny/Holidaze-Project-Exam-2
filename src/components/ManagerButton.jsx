@@ -5,7 +5,14 @@ const ManagerButton = () => {
   const { user, upgradeToManager } = useAuth();
 
   if (!user) {
-    return <p>Please log in to access this feature.</p>;
+    return (
+      <button
+      className="p-2 bg-stone-300 text-white rounded hover:bg-orange-300"
+      onClick={() => alert("To become a manager, you need to log in first.")}
+      >
+        Turn me to Venue Manager
+      </button>
+    )
   }
 
   if (user.role === "manager") {
@@ -15,9 +22,10 @@ const ManagerButton = () => {
   return (
     <button
     onClick={upgradeToManager}
-    className="p-2 bg-green-500 text-white rounded hover:bg-green-600"
+    className="p-2 bg-stone-300 text-white rounded hover:bg-orange-300"
     >
-      Upgrade to Manager
+      Turn me to Venue Manager
+      {/* <span className="">In order to add a Venue, you need to upgrade to Manager</span> */}
     </button>
   )
 };

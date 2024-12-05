@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../api/auth/logout";
 import { useAuth } from "../context/AuthContext";
+import AddAVenueButton from "./AddAVennueButton";
 import ManagerButton from "./ManagerButton";
+// import Modal from "./Modal";
 
 function Sidebar() {
   const { user } = useAuth();
@@ -48,12 +50,7 @@ function Sidebar() {
           </a>
         </li>
         <li>
-          <Link
-            href="#"
-            className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
-          >
-            Add a venue
-          </Link>
+          <AddAVenueButton />
         </li>
         <li>
           {!user && (
@@ -88,13 +85,6 @@ function Sidebar() {
         </li>
         <li>
           <ManagerButton />
-          {/* <Link
-            // onClick={logout}
-            id="logOut"
-            className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
-          >
-            Upgrade to Manager
-          </Link> */}
         </li>
       </ul>
     </aside>

@@ -90,7 +90,7 @@ export default function ProfilePage() {
   }
 
   if (!profile) {
-    return <div>Failed to load profile. Please try again later.</div>;
+    return <div>You need to log in to get access to this page!</div>;
   }
 
   return (
