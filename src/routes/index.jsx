@@ -7,6 +7,7 @@ import {
   ProfilePage,
   RegisterForm,
   LoginForm,
+  VenueForm
 } from "../pages/index";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="MyVenues" />
           <Route path="auth/Register" element={<RegisterForm />} />
           <Route path="auth/Login" element={<LoginForm />} />
+          <Route path="VenueForm" element={<VenueForm />} />
         </Route>
       </Routes>
     </BrowserRouter>
