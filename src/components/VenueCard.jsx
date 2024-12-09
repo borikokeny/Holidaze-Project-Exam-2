@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { removeVenue } from "../api/venue/addVenue";
 import ReserveButton from "./ReserveButton";
 import Media from "./media";
 import placeholderImage from "../images/Placeholder.jpg";
@@ -8,8 +9,9 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const VenueCard = ({ venue }) => {
+const VenueCard = ({ venue, onDeleteSuccess }) => {
   const {user} = useAuth();
+  const userEmail = user?.data?.email;
   console.log("VenueCard user:", user);
   
   const {
@@ -24,8 +26,25 @@ const VenueCard = ({ venue }) => {
     updated,
     meta,
     location,
+    owner,
   } = venue;
   const [startDate, setStartDate] = useState(new Date());
+
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this venue?")) {
+      try {
+        await removeVenue(id); 
+        alert("Venue deleted successfully!");
+
+        if (onDeleteSuccess) {
+          onDeleteSuccess(id); 
+        }
+      } catch (error) {
+        console.error("Error deleting venue:", error);
+        alert(error.message || "Failed to delete the venue.");
+      }
+    }
+  };
 
   return (
     <div className="flex">
@@ -104,6 +123,14 @@ const VenueCard = ({ venue }) => {
         />
         <ReserveButton />
         {/* <button className="w-64 mt-2 rounded-none bg-sky-500 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60">Reserve</button> */}
+        {userEmail === owner?.email && ( 
+          <button
+            onClick={handleDelete}
+            className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+          >
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );
