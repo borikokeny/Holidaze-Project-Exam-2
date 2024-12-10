@@ -35,7 +35,7 @@ export async function removeVenue(venueId) {
 
     if (response.ok) {
       alert("The venue has been successfully deleted.");
-      return true; // Indicates successful deletion
+      return true; 
     } else {
       const errorData = await response.json();
       throw new Error(
