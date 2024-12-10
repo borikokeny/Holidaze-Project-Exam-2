@@ -10,10 +10,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const VenueCard = ({ venue, onDeleteSuccess }) => {
-  const {user} = useAuth();
-  const userEmail = user?.data?.email;
+  const { user } = useAuth();
+
+  const userEmail = user?.email;
   console.log("VenueCard user:", user);
-  
+  console.log("userEmail:", userEmail);
+
   const {
     id,
     name,
@@ -28,20 +30,20 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
     location,
     owner,
   } = venue;
+
+  const ownerEmail = owner.email;
+  console.log("owner.email:", ownerEmail);
+
   const [startDate, setStartDate] = useState(new Date());
 
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this venue?")) {
       try {
-        await removeVenue(id); 
-
-       
+        await removeVenue(id);
         alert("Venue deleted successfully!");
-        
 
         if (onDeleteSuccess) {
-          onDeleteSuccess(id); 
-          
+          onDeleteSuccess(id);
         }
       } catch (error) {
         console.error("Error deleting venue:", error);
@@ -126,8 +128,7 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
           onChange={(date) => setStartDate(date)}
         />
         <ReserveButton />
-        {/* <button className="w-64 mt-2 rounded-none bg-sky-500 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60">Reserve</button> */}
-        {userEmail === owner?.email && ( 
+        {userEmail === owner?.email && (
           <button
             onClick={handleDelete}
             className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"

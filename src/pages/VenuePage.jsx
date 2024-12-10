@@ -10,7 +10,7 @@ function Venue() {
   useEffect(() => {
     const fetchVenue = async () => {
       try {
-        const response = await fetch(`${VENUES_URL}/${venueId}`);
+        const response = await fetch(`${VENUES_URL}/${venueId}?_owner=true`);
         const jsonData = await response.json();
         if (!response.ok) {
           throw new Error(`HTTP status ${response.status}`);
