@@ -34,10 +34,14 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
     if (window.confirm("Are you sure you want to delete this venue?")) {
       try {
         await removeVenue(id); 
+
+       
         alert("Venue deleted successfully!");
+        
 
         if (onDeleteSuccess) {
           onDeleteSuccess(id); 
+          
         }
       } catch (error) {
         console.error("Error deleting venue:", error);

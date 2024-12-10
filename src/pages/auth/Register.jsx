@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import { useAuth } from "../../context/AuthContext";
 import { register } from "../../api/auth/register";
 // import { useForm } from "react-hook-form";
 import Santorini from "../../images/Santorini.png";
@@ -15,6 +16,7 @@ function RegisterForm() {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  // const { upgradeToManager } = useAuth();
 
   const registerFormListener = async (e) => {
     e.preventDefault();
@@ -23,13 +25,19 @@ function RegisterForm() {
       name: formData.name,
       email: formData.email,
       password: formData.password,
-      venueManager: formData.venueManager, 
+      venueManager: formData.venueManager,
       ...(formData.avatar.trim() && { avatar: { url: formData.avatar } }),
     };
 
     try {
       console.log("Payload:", preparedData);
       await register(preparedData);
+      
+
+      // if (formData.venueManager) {
+      //   upgradeToManager();
+      // }
+
       navigate("/auth/login");
     } catch (err) {
       setError(err.message || "Something went wrong");

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Children } from "react";
+// import { Children } from "react";
 
 const AuthContext = createContext();
 
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
   const upgradeToManager = () => {
     if (user) {
-      const updatedUser = { ...user, role: "manager" };
+      const updatedUser = { ...user, venueManager: true };
       setUser(updatedUser);
       localStorage.setItem("profile", JSON.stringify(updatedUser))
     }

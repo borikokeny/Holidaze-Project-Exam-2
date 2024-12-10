@@ -24,3 +24,26 @@ export async function addVenue(formData) {
     throw error;
   }
 }
+
+export async function removeVenue(venueId) {
+  console.log("Deleting venue with ID:", venueId);
+  try {
+    const response = await fetch(`${VENUES_URL}/${venueId}`, {
+      headers: headers(),
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      alert("The venue has been successfully deleted.");
+      return true; // Indicates successful deletion
+    } else {
+      const errorData = await response.json();
+      throw new Error(
+        errorData.message || "Failed to delete the venue. Please try again."
+      );
+    }
+  } catch (error) {
+    console.error("Deletion failed:", error);
+    throw error;
+  }
+}
