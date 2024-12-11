@@ -12,6 +12,12 @@ export default function VenueList({ venues }) {
       {venues.map((venue) => {
         const { id, name, media, price, created } = venue;
 
+        let createdDate = "N/A";
+        if (created) {
+          let createdDateObj = new Date(created);
+          createdDate = createdDateObj.toLocaleDateString();
+        }
+
         return (
           <div key={id}>
             <Link to={`/venuePage/${id}`}>
@@ -27,10 +33,10 @@ export default function VenueList({ venues }) {
                     <Media media={[media[0]]} className="" />
                   )}
                 </div>
-                <div className="ms-6">
-                  <h2>{name}</h2>
+                <div className="ms-6 text-stone-800">
+                  <h2 className="font-semibold">{name}</h2>
                   <h3>{price} NOK / night</h3>
-                  <h4>{created}</h4>
+                  <h4>Created: {createdDate}</h4>
                 </div>
               </div>
             </Link>
