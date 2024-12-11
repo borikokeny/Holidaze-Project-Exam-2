@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { removeVenue } from "../api/venue/addVenue";
+import { useNavigate } from "react-router-dom";
+import { MdOutlinePets, MdFreeBreakfast } from "react-icons/md";
+import { FaWifi, FaParking } from "react-icons/fa";
 import ReserveButton from "./ReserveButton";
 import Media from "./media";
 import placeholderImage from "../images/Placeholder.jpg";
 import Ratings from "./ratings";
 import DatePicker from "react-datepicker";
 
+//<FaWifi /> <MdOutlinePets /> <MdFreeBreakfast /> <FaParking />
+
 import "react-datepicker/dist/react-datepicker.css";
+import { NavLink } from "react-bootstrap";
 
 const VenueCard = ({ venue, onDeleteSuccess }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const userEmail = user?.email;
   console.log("VenueCard user:", user);
@@ -45,6 +52,7 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
         if (onDeleteSuccess) {
           onDeleteSuccess(id);
         }
+        navigate("/");
       } catch (error) {
         console.error("Error deleting venue:", error);
         alert(error.message || "Failed to delete the venue.");
@@ -101,31 +109,44 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
         <p className="text-lg mb-3 text-stone-600">
           Max guests: {maxGuests} person
         </p>
-        <p className="text-lg font-medium text-stone-600">This place offers:</p>
+        <p className="text-lg font-medium text-stone-600 mb-3">
+          This place offers:
+        </p>
         <div className="table-row">
-          <p className="table-cell pe-2">
-            {(meta.wifi = true ? "Wifi" : "NO Wifi")}
-          </p>
-          <p className="table-cell pe-2">
-            {(meta.parking = true ? "Parking" : "NO Parking")}
-          </p>
-          <p className="table-cell pe-2">
-            {(meta.breakfast = true ? "Breakfast" : "NO Breakfast")}
-          </p>
-          <p className="table-cell pe-2">
-            {(meta.pets = true ? "Pets allowed" : "Sorry pets are not allowed")}
-          </p>
+          <div className="">
+            <p className="flex pe-2">
+              <FaWifi className="mt-1 me-3 mb-3 text-teal-500" />
+              {meta.wifi ? "Wifi" : "NO Wifi"}
+            </p>
+            <p className="flex pe-2">
+              <FaParking className="mt-1 me-3 text-teal-500" />
+              {meta.parking ? "Parking" : "NO Parking"}
+            </p>
+          </div>
+
+          <div className="table-cell">
+            <p className="flex pe-2">
+              <MdFreeBreakfast className="mt-1 me-3 mb-3 text-teal-500" />
+              {meta.breakfast ? "Breakfast" : "Breakfast is not included"}
+            </p>
+            <p className="flex pe-2">
+              <MdOutlinePets className="mt-1 me-3 text-teal-500" />
+              {meta.pets ? "Pets allowed" : "Sorry, pets are not allowed"}
+            </p>
+          </div>
         </div>
 
-        <p className="text-lg font-medium mt-3">Address: </p>
+        <p className="text-lg font-medium mt-3 text-stone-600">Address: </p>
         <p className="">{location.address}</p>
-        <p>{location.city}</p>
-        <p>{location.zip}</p>
-        <p>{location.country}</p>
-        <p>{location.continent}</p>
+        <p className="text-stone-600">{location.city}</p>
+        <p className="text-stone-600">{location.zip}</p>
+        <p className="text-stone-600">{location.country}</p>
+        <p className="text-stone-600">{location.continent}</p>
         <DatePicker
           selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          onChange={(date) => setStartDate(date)
+          }
+          className="text-stone-600"
         />
         <ReserveButton />
         {userEmail === owner?.email && (
