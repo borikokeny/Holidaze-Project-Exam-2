@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { login } from "../../api/auth/login";
 import { useAuth } from "../../context/AuthContext";
 import Mountains from "../../images/Mountains.png";
-import { redirect } from "react-router-dom";
 
 const LoginForm = ({ redirect = true, onLoginSuccess }) => {
   const { login: setUser } = useAuth();
@@ -14,14 +13,16 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
     setError("");
 
     try {
-      const profile = await login(formData.email, formData.password);
-      setUser(profile);
+      const { profile } = await login(formData.email, formData.password);
+
+      setUser({ profile });
+
       if (redirect) {
         location.assign("/");
       }
-      
-
-      console.log("Login successful:", profile);
+      if (onLoginSuccess) {
+        onLoginSuccess();
+      }
     } catch (err) {
       console.error("Login failed:", err);
       setError("Invalid email or password. Please try again.");
@@ -35,7 +36,6 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
       </div>
       <form onSubmit={loginFormListener} className="flex mt-3 mb-3 pe-8">
         <div className="border rounded-md p-6 bg-gray-100">
-          <p>fnføklsjklgsæl</p>
           <input
             type="email"
             value={formData.email}
@@ -47,7 +47,7 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
             className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
           />
           <input
-            type="Password"
+            type="password"
             value={formData.password}
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
@@ -69,6 +69,6 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
       </form>
     </div>
   );
-}
+};
 
 export default LoginForm;

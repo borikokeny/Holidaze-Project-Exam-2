@@ -21,21 +21,24 @@ export async function login(email, password) {
     }
 
     const responseData = await response.json();
-    console.log("Response data:", responseData);
+    console.log("Full response data:", responseData);
 
-    const { accessToken, ...profile } = responseData.data || responseData;
+    const { accessToken, venueManager, ...profile } =
+      responseData.data || responseData;
 
     if (!accessToken) {
       throw new Error("Login successful but token is missing");
     }
 
-  
     save("token", accessToken);
     save("profile", profile);
 
+    console.log("Saved profile:", profile);
+    console.log("Saved venueManager:", venueManager);
+
     alert("You are now logged in");
 
-    return profile;
+    return { profile };
   } catch (error) {
     console.error("Login process failed:", error.message);
     throw error;
