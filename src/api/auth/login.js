@@ -6,7 +6,7 @@ export async function login(email, password) {
   try {
     console.log("Attempting login with email:", email);
 
-    const response = await fetch(`${LOG_URL}`, {
+    const response = await fetch(`${LOG_URL}?_holidaze=true`, {
       headers: headers(true),
       method: "POST",
       body: JSON.stringify({ email, password }),
@@ -31,14 +31,20 @@ export async function login(email, password) {
     }
 
     save("token", accessToken);
-    save("profile", profile);
 
-    console.log("Saved profile:", profile);
-    console.log("Saved venueManager:", venueManager);
+    const updatedProfile = {
+      ...profile,
+      venueManager: venueManager ?? false,
+    };
+
+    save("profile", updatedProfile);
+
+    console.log("Saved profile:", updatedProfile);
+    console.log("Saved venueManager:", updatedProfile.venueManager);
 
     alert("You are now logged in");
 
-    return { profile };
+    return { profile: updatedProfile };
   } catch (error) {
     console.error("Login process failed:", error.message);
     throw error;

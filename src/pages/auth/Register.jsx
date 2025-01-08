@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -17,7 +16,7 @@ function RegisterForm() {
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  // const { upgradeToManager } = useAuth();
+  const { upgradeToManager } = useAuth();
 
   const registerFormListener = async (e) => {
     e.preventDefault();
@@ -29,15 +28,14 @@ function RegisterForm() {
       venueManager: formData.venueManager,
       ...(formData.avatar.trim() && { avatar: { url: formData.avatar } }),
     };
-
+    console.log("Payload sent to backend:", preparedData);
     try {
       console.log("Payload:", preparedData);
       await register(preparedData);
-      
 
-      // if (formData.venueManager) {
-      //   upgradeToManager();
-      // }
+      if (formData.venueManager) {
+        upgradeToManager();
+      }
 
       navigate("/auth/login");
     } catch (err) {
@@ -95,7 +93,7 @@ function RegisterForm() {
           />
           <input
             type="checkbox"
-            checked={formData.venueManager} 
+            checked={formData.venueManager}
             onChange={(e) =>
               setFormData({ ...formData, venueManager: e.target.checked })
             }

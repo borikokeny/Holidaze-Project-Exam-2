@@ -15,7 +15,13 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
     try {
       const { profile } = await login(formData.email, formData.password);
 
-      setUser({ profile });
+      const updatedProfile = {
+        ...profile,
+        venueManager: profile.venueManager || false,
+      };
+
+      setUser(updatedProfile);
+      localStorage.setItem("profile", JSON.stringify(updatedProfile));
 
       if (redirect) {
         location.assign("/");
