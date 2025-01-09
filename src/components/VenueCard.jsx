@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { removeVenue } from "../api/venue/addVenue";
+import { updateVenue, removeVenue } from "../api/venue";
 import { useNavigate } from "react-router-dom";
 import { MdOutlinePets, MdFreeBreakfast } from "react-icons/md";
 import { FaWifi, FaParking } from "react-icons/fa";
 import ReserveButton from "./ReserveButton";
-import Media from "./media";
+import { Carousel } from "@material-tailwind/react";
+// import Media from "./media";
 import placeholderImage from "../images/Placeholder.jpg";
 import Ratings from "./ratings";
 import DatePicker from "react-datepicker";
-
-//<FaWifi /> <MdOutlinePets /> <MdFreeBreakfast /> <FaParking />
 
 import "react-datepicker/dist/react-datepicker.css";
 import { NavLink } from "react-bootstrap";
@@ -43,6 +42,8 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
 
   const [startDate, setStartDate] = useState(new Date());
 
+  const handleUpdate = async () => {};
+
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this venue?")) {
       try {
@@ -63,40 +64,66 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
   return (
     <div className="flex">
       <div className="w-2/5 bg-white p-4 mb-6">
-        {media.length === 0 ? (
+      {Array.isArray(media) && media.length > 0 ? (
+    <Carousel className="rounded-xl w-full h-64">
+      {media.map((image, index) => (
+        <img
+          key={index}
+          src={image.url} // Ensure each media object has a 'url' property
+          alt={`${name} image ${index + 1}`} // Add fallback alt text
+          className="h-full w-full object-cover"
+        />
+      ))}
+    </Carousel>
+  ) : (
+    <img src={placeholderImage} className="w-full h-64 object-cover rounded-xl" alt={`${name} placeholder`} />
+  )}
+
+
+        {/* {media.length === 0 ? (
           <img src={placeholderImage} className="w-64" alt={name} />
         ) : (
-          <>
-            <Media
-              media={[media[0]]}
-              className="w-full h-64 object-cover mt-5 mb-4"
-              useClipCustom={false}
+          <Carousel className="rounded-xl w-full h-64">
+          {media.map((image, index) => (
+            <img
+              key={index}
+              src={image.url}
+              alt={`${image.name} image ${index + 1}`}
+              className="h-full w-full object-cover"
             />
+          ))}
+        </Carousel>
+          // <>
+          //   <Media
+          //     media={[media[0]]}
+          //     className="w-full h-64 object-cover mt-5 mb-4"
+          //     useClipCustom={false}
+          //   />
 
-            <div className="flex gap-2">
-              {media.slice(1, 4).map((image, index) => (
-                <Media
-                  key={index}
-                  media={[image]}
-                  className="w-1/3 h-24 object-cover rounded-md"
-                  alt={name}
-                  useClipCustom={false}
-                />
-              ))}
+          //   <div className="flex gap-2">
+          //     {media.slice(1, 4).map((image, index) => (
+          //       <Media
+          //         key={index}
+          //         media={[image]}
+          //         className="w-1/3 h-24 object-cover rounded-md"
+          //         alt={name}
+          //         useClipCustom={false}
+          //       />
+          //     ))}
 
-              {Array(3 - media.slice(1, 4).length)
-                .fill()
-                .map((_, index) => (
-                  <img
-                    key={`placeholder-${index}`}
-                    src={placeholderImage}
-                    className="w-1/4 h-36 object-cover"
-                    alt={`${name} placeholder`}
-                  />
-                ))}
-            </div>
-          </>
-        )}
+          //     {Array(3 - media.slice(1, 4).length)
+          //       .fill()
+          //       .map((_, index) => (
+          //         <img
+          //           key={`placeholder-${index}`}
+          //           src={placeholderImage}
+          //           className="w-1/4 h-36 object-cover"
+          //           alt={`${name} placeholder`}
+          //         />
+          //       ))}
+          //   </div>
+          // </>
+        )} */}
       </div>
 
       <div className="w-3/5">
@@ -144,18 +171,25 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
         <p className="text-stone-600">{location.continent}</p>
         <DatePicker
           selected={startDate}
-          onChange={(date) => setStartDate(date)
-          }
+          onChange={(date) => setStartDate(date)}
           className="text-stone-600"
         />
         <ReserveButton />
         {userEmail === owner?.email && (
-          <button
-            onClick={handleDelete}
-            className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-          >
-            Delete
-          </button>
+          <div>
+            <button
+              onClick={handleUpdate}
+              className="mt-4 px-4 py-2 bg-blue-700 text-white rounded hover:bg-red-600"
+            >
+              Update
+            </button>
+            <button
+              onClick={handleDelete}
+              className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+            >
+              Delete
+            </button>
+          </div>
         )}
       </div>
     </div>
