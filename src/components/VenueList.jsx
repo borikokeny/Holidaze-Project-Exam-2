@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Media from "./media";
+import { LuMapPin } from "react-icons/lu";
 
 export default function VenueList({ venues }) {
   if (!venues || venues.length === 0) {
@@ -10,33 +11,36 @@ export default function VenueList({ venues }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
       {venues.map((venue) => {
-        const { id, name, media, price, created } = venue;
+        const { id, name, media, price, location } = venue;
 
-        let createdDate = "N/A";
-        if (created) {
-          let createdDateObj = new Date(created);
-          createdDate = createdDateObj.toLocaleDateString();
-        }
+        // let createdDate = "N/A";
+        // if (created) {
+        //   let createdDateObj = new Date(created);
+        //   createdDate = createdDateObj.toLocaleDateString();
+        // }
 
         return (
           <div key={id}>
             <Link to={`/venuePage/${id}`}>
-              <div className="card w-60 bg-white overflow-hidden shadow-lg">
+              <div className="card w-60 bg-white overflow-hidden">
                 <div className="image-container relative overflow-hidden">
                   {media.length === 0 ? (
                     <img
                       src="src/images/images.png"
                       alt="default"
-                      className="w-64 h-48 block clip-custom"
+                      className="w-64 h-48 block"
                     />
                   ) : (
                     <Media media={[media[0]]} className="" />
                   )}
                 </div>
-                <div className="ms-6 text-stone-800">
-                  <h2 className="font-semibold">{name}</h2>
-                  <h3>{price} NOK / night</h3>
-                  <h4>Created: {createdDate}</h4>
+                <div className="text-stone-800">
+                  <h1 className="font-semibold mt-1">{name}</h1>
+                  <div className="flex">
+                  <LuMapPin className="mt-1 me-1"/>
+                  <h3>{location.country}</h3>
+                  </div>
+                  <h3><strong>{price} nok</strong>/night</h3>
                 </div>
               </div>
             </Link>
