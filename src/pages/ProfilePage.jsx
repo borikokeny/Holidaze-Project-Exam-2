@@ -7,12 +7,13 @@ import {
   MdOutlineCheckBoxOutlineBlank,
   MdOutlineModeEdit,
 } from "react-icons/md";
+import Modal from "../components/Modal";
 import SomePage from "../components/Access";
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
 
   useEffect(() => {
@@ -29,7 +30,6 @@ export default function ProfilePage() {
         }
 
         setProfile(profileData);
-        // console.log("Fetched profile:", profileData); // Debugging log
       } catch (error) {
         console.error("Failed to fetch profile:", error);
       } finally {
@@ -40,11 +40,16 @@ export default function ProfilePage() {
   }, []);
 
   const openForm = () => {
-    setIsFormVisible((prev) => !prev);
+    setOpenModal(true);
+  };
+
+  const closeForm = () => {
+    setOpenModal(false);
+    setAvatarUrl("");
   };
 
   const updateProfileListener = async (e) => {
-    e.preventDefault(); // Prevent form reload
+    e.preventDefault();
 
     try {
       if (!avatarUrl) {
@@ -56,19 +61,11 @@ export default function ProfilePage() {
         throw new Error("Profile name is missing");
       }
 
-      // console.log("Updating profile with:", {
-      //   name: profileName,
-      //   avatar: { url: avatarUrl },
-      // });
-
       const updatedProfile = await updateProfile({
         name: profileName,
         avatar: { url: avatarUrl },
       });
 
-      // console.log("Updated profile data:", updatedProfile);
-
-      // Update the profile in state and hide the form
       setProfile((prev) => ({
         ...prev,
         data: {
@@ -76,8 +73,9 @@ export default function ProfilePage() {
           avatar: updatedProfile.data.avatar,
         },
       }));
-      setAvatarUrl(""); // Clear the input field
-      setIsFormVisible(false); // Hide the form
+
+      closeForm();
+
       alert("Profile updated successfully!");
     } catch (error) {
       console.error("Failed to update profile:", error);
@@ -124,15 +122,16 @@ export default function ProfilePage() {
           >
             <MdOutlineModeEdit />
           </button>
-          {isFormVisible && (
-            <div>
+
+          {openModal && (
+            <Modal onClose={closeForm}>
               <form onSubmit={updateProfileListener}>
                 <input
                   type="url"
                   placeholder="Add your new avatar url"
                   className="border p-2 me-3"
                   value={avatarUrl}
-                  onChange={(e) => setAvatarUrl(e.target.value)} // Update state on input change
+                  onChange={(e) => setAvatarUrl(e.target.value)}
                   required
                 />
                 <button
@@ -142,7 +141,7 @@ export default function ProfilePage() {
                   Update your avatar
                 </button>
               </form>
-            </div>
+            </Modal>
           )}
         </div>
       </div>
