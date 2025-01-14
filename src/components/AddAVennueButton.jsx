@@ -22,6 +22,7 @@ const AddAVenueButton = () => {
             redirect={false}
             onLoginSuccess={() => {
               setModalContent(null); // Close modal after successful login
+              navigate("/VenueForm");
             }}
           />
         ),

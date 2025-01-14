@@ -83,9 +83,9 @@ function Sidebar() {
             </Link>
           )}
         </li>
-        <li>
+        {/* <li>
           <ManagerButton />
-        </li>
+        </li> */}
       </ul>
     </aside>
   );

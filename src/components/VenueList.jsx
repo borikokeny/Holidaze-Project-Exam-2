@@ -39,7 +39,7 @@ export default function VenueList({ venues }) {
                     <Media media={[media[0]]} className="" />
                   )}
                 </div>
-                <div className="text-stone-800">
+                <div className="text-gray-800">
                   <h1 className="font-semibold mt-1">{name}</h1>
                   <div className="flex items-center">
                   <LuMapPin className="items-center  me-1"/>
