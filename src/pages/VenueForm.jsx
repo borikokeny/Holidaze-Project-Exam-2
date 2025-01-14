@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addVenue } from "../api/venue/addVenue";
+import { addVenue } from "../api/venue";
 
 function VenueForm() {
   const [formData, setFormData] = useState({
@@ -24,21 +24,19 @@ function VenueForm() {
       continent: "",
     },
   });
-
-
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const venueFormListener = async (e) => {
     e.preventDefault();
 
-
     const preparedData = {
       name: formData.name,
       description: formData.description,
       media: formData.media.length
-      ? formData.media.split(",").map((url) => ({ url: url.trim() }))
-      : [],
+        ? formData.media.split(",").map((url) => ({ url: url.trim() }))
+        : [],
+
       price: parseFloat(formData.price) || 0,
       maxGuests: parseInt(formData.maxGuests, 10) || 0,
       rating: parseFloat(formData.rating) || 0,
@@ -58,7 +56,6 @@ function VenueForm() {
     };
 
     try {
-      console.log("Payload:", preparedData);
       await addVenue(preparedData);
       navigate("/");
     } catch (err) {
@@ -67,172 +64,178 @@ function VenueForm() {
   };
 
   return (
-    <div className="flex justify-center border-2 w-3/5">
-      <form onSubmit={venueFormListener} className="flex mt-3 mb-3 pe-8">
-        <div className="border rounded-md p-6 bg-gray-100">
-          <h1>Add a Venue</h1>
-          <input
-            type="name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            placeholder="Name"
-            required
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
-          />
-          <textarea
-            value={formData.description}
-            onChange={(e) =>
-              setFormData({ ...formData, description: e.target.value })
-            }
-            placeholder="Description"
-            required
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
-          />
-          <input
-            type="text"
-            value={formData.media}
-            onChange={(e) =>
-              setFormData({ ...formData, media: e.target.value })
-            }
-            placeholder="Image URL"
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
-          />
-          <input
-            type="number"
-            value={formData.price}
-            onChange={(e) =>
-              setFormData({ ...formData, price: e.target.value })
-            }
-            placeholder="Price"
-            required
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
-          />
-          <input
-            type="number"
-            value={formData.maxGuests}
-            onChange={(e) =>
-              setFormData({ ...formData, maxGuests: e.target.value })
-            }
-            placeholder="Max Guests"
-            title="A venue must accommodate at least one guest."
-            required
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
-          />
-          <div className="flex">
-            <label>
-              <input
-                type="checkbox"
-                value={formData.meta.wifi}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    meta: { ...formData.meta, wifi: e.target.checked },
-                  })
-                }
-              />
-              Wifi
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value={formData.meta.parking}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    meta: { ...formData.meta, parking: e.target.checked },
-                  })
-                }
-              />
-              Parking
-            </label>
+    <div className="justify-center w-3/5">
+      <div>
+        <h1 className="">Add a Venue</h1>
+      </div>
+      <div>
+        <form onSubmit={venueFormListener} className="flex mt-3 mb-3 pe-8">
+          <div className="border rounded-md p-6 bg-gray-100">
+            <input
+              type="name"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              placeholder="Name*"
+              required
+              className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            />
+            <textarea
+              value={formData.description}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
+              placeholder="Description*"
+              required
+              className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            />
+            <input
+              type="text"
+              value={formData.media}
+              onChange={(e) =>
+                setFormData({ ...formData, media: e.target.value })
+              }
+              placeholder="Image URL*"
+              className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            />
+            <input
+              type="number"
+              value={formData.price}
+              onChange={(e) =>
+                setFormData({ ...formData, price: e.target.value })
+              }
+              placeholder="Price*"
+              required
+              className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            />
+            <input
+              type="number"
+              value={formData.maxGuests}
+              onChange={(e) =>
+                setFormData({ ...formData, maxGuests: e.target.value })
+              }
+              placeholder="Max Guests*"
+              title="A venue must accommodate at least one guest."
+              required
+              className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            />
+            <div className="flex">
+              <label>
+                <input
+                  type="checkbox"
+                  value={formData.meta.wifi}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      meta: { ...formData.meta, wifi: e.target.checked },
+                    })
+                  }
+                />
+                Wifi
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value={formData.meta.parking}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      meta: { ...formData.meta, parking: e.target.checked },
+                    })
+                  }
+                />
+                Parking
+              </label>
+            </div>
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  value={formData.meta.breakfast}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      meta: { ...formData.meta, breakfast: e.target.checked },
+                    })
+                  }
+                />
+                Breakfast
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  value={formData.meta.pets}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      meta: { ...formData.meta, pets: e.target.checked },
+                    })
+                  }
+                />
+                Pets
+              </label>
+            </div>
+            <input
+              type="text"
+              value={formData.location.address}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  location: { ...formData.location, address: e.target.value },
+                })
+              }
+              placeholder="Address"
+              className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            />
+            <input
+              type="text"
+              value={formData.location.city}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  location: { ...formData.location, city: e.target.value },
+                })
+              }
+              placeholder="City"
+              className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            />
+            <input
+              type="text"
+              value={formData.location.zip}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  location: { ...formData.location, zip: e.target.value },
+                })
+              }
+              placeholder="Zip"
+              className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            />
+            <input
+              type="text"
+              value={formData.location.country}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  location: { ...formData.location, country: e.target.value },
+                })
+              }
+              placeholder="Country"
+              className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            />
+            <div>
+              <button
+                type="submit"
+                className="w-64 mt-2 bg-green-800 rounded-none bg-sky-500 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
+              >
+                Publish Venue
+              </button>
+              {error && <p className="text-red-500">{error}</p>}
+            </div>
           </div>
-          <div>
-            <label>
-              <input
-                type="checkbox"
-                value={formData.meta.breakfast}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    meta: { ...formData.meta, breakfast: e.target.checked },
-                  })
-                }
-              />
-              Breakfast
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                value={formData.meta.pets}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    meta: { ...formData.meta, pets: e.target.checked },
-                  })
-                }
-              />
-              Pets
-            </label>
-          </div>
-          <input
-            type="text"
-            value={formData.location.address}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                location: { ...formData.location, address: e.target.value },
-              })
-            }
-            placeholder="Address"
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
-          />
-          <input
-            type="text"
-            value={formData.location.city}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                location: { ...formData.location, city: e.target.value },
-              })
-            }
-            placeholder="City"
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
-          />
-          <input
-            type="text"
-            value={formData.location.zip}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                location: { ...formData.location, zip: e.target.value },
-              })
-            }
-            placeholder="Zip"
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
-          />
-          <input
-            type="text"
-            value={formData.location.country}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                location: { ...formData.location, country: e.target.value },
-              })
-            }
-            placeholder="Country"
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
-          />
-          <div>
-            <button
-              type="submit"
-              className="w-64 mt-2 rounded-none bg-sky-500 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
-            >
-              Publish Venue
-            </button>
-            {error && <p className="text-red-500">{error}</p>}
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }
