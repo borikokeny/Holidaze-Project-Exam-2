@@ -1,6 +1,34 @@
 import { VENUES_URL } from "../constants";
 import { headers } from "../constants/headers";
 
+export async function viewVenues() {
+  try {
+    const response = await fetch(`${VENUES_URL}?sort=created&sortOrder=desc`);
+    const jsonData = await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP status ${response.status}`);
+    }
+    return jsonData.data;
+  } catch (error) {
+    console.error("Failed to fetch venue:", error);
+    throw error;
+  }
+}
+
+export async function viewVenue(venueId) {
+  try {
+    const response = await fetch(`${VENUES_URL}/${venueId}?_owner=true&_bookings=true`);
+    const jsonData = await response.json();
+    if (!response.ok) {
+      throw new Error(`HTTP status ${response.status}`);
+    }
+    return jsonData.data;
+  } catch (error) {
+    console.error("Failed to fetch venue:", error);
+    throw error;
+  }
+}
+
 export async function addVenue(formData) {
   console.log("Sending data:", formData);
   try {
