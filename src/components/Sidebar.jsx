@@ -10,7 +10,7 @@ function Sidebar() {
   const { user } = useAuth();
   return (
     <aside className="flex flex-col flex-shrink-0 p-4 h-screen w-48">
-      <ul className="flex flex-col space-y-2">
+      <ul className="flex font-nav  flex-col space-y-2">
         <li>
           <div className="mt-auto ms-8">
             <div

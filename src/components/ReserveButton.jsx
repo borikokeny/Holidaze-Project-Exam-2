@@ -16,7 +16,7 @@ const ReserveButton = () => {
   };
 
   const handleLoginSuccess = () => {
-    setIsModalOpen(false); // Close the modal after successful login
+    setIsModalOpen(false); 
     alert("You are now logged in!");
   };
 
@@ -24,7 +24,7 @@ const ReserveButton = () => {
     <>
       <button
         onClick={handleReserveClick}
-        className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        className="p-2 bg-gray-700 text-white rounded hover:bg-gray-900 w-full"
       >
         Reserve
       </button>

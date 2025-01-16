@@ -7,7 +7,7 @@ export default function SearchBar({ searchValue, setSearchValue }) {
       value={searchValue}
       onChange={(e) => setSearchValue(e.target.value)}
       placeholder="Search venues"
-      className="p-2 border rounded w-full"
+      className="p-2 font-nav border rounded w-full"
     />
   );
 }

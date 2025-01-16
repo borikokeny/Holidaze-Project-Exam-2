@@ -3,3 +3,11 @@
 @tailwind utilities;
 
 /*custom ccs*/
+
+.font-main {
+  font-family: "Outfit", sherif ;
+}
+
+.font-nav {
+  font-family: "Quicksand", sherif;
+}
