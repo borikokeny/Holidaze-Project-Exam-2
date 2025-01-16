@@ -7,6 +7,8 @@ import {
   ProfilePage,
   RegisterForm,
   LoginForm,
+  MyBookings,
+  MyVenues,
   VenueForm
 } from "../pages/index";
 
@@ -18,7 +20,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="VenuePage/:venueId" element={<Venue />} />
           <Route path="ProfilePage" element={<ProfilePage />} />
-          <Route path="MyVenues" />
+          <Route path="MyBookings" element={<MyBookings />} />
+          <Route path="MyVenues" element={<MyVenues />} />
           <Route path="auth/Register" element={<RegisterForm />} />
           <Route path="auth/Login" element={<LoginForm />} />
           <Route path="VenueForm" element={<VenueForm />} />

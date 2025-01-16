@@ -34,7 +34,7 @@ function Sidebar() {
         <li>
           {user && (
             <Link
-              href="#"
+              to="/MyBookings"
               className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
             >
               My bookings
@@ -42,12 +42,12 @@ function Sidebar() {
           )}
         </li>
         <li>
-          <a
-            href="#"
+          <Link
+            to="/MyVenues"
             className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
           >
             My venues
-          </a>
+          </Link>
         </li>
         <li>
           <AddAVenueButton />
