@@ -2,7 +2,7 @@ import { PROFILES_URL } from "../constants";
 import { headers } from "../constants/headers";
 
 export async function viewProfiles() {
-  const response = await fetch(PROFILES_URL, {
+  const response = await fetch(`${PROFILES_URL}?_bookings=true&_venues=true`, {
     method: "GET",
     headers: headers(),
   });
@@ -14,7 +14,7 @@ export async function viewProfile(name) {
   if (!name) {
     throw new Error("Get needs a profile name");
   }
-  const response = await fetch(`${PROFILES_URL}/${name}`, {
+  const response = await fetch(`${PROFILES_URL}/${name}?_bookings=true&_venues=true`, {
     method: "GET",
     headers: headers(),
   });
