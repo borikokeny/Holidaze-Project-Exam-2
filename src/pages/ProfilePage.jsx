@@ -112,7 +112,7 @@ export default function ProfilePage() {
               <MdOutlineCheckBoxOutlineBlank />
             </div>
           </div>
-          <p className="mt-3 font-semibold">
+          <p to="/MyBookings" className="mt-3 font-semibold">
             Bookings: {profile.data._count.bookings}
           </p>
           <p className="font-semibold">Venues: {profile.data._count.venues}</p>
@@ -145,7 +145,7 @@ export default function ProfilePage() {
           )}
         </div>
       </div>
-      <Link
+      {/* <Link
         to="/MyVenues"
         className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
       >
@@ -162,7 +162,7 @@ export default function ProfilePage() {
         className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
       >
         Add a Venue
-      </Link>
+      </Link> */}
     </div>
   );
 }
