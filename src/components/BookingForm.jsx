@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { viewVenue } from "../api/venue";
 import { addBooking } from "../api/booking";
 import { CountGuests } from "./GuestCounter";
@@ -9,9 +9,34 @@ function BookingForm({ venue }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [numberOfGuests, setNumberOfGuests] = useState(1);
+  const [bookedDays, setBookedDays] = useState([]);
   const [error, setError] = useState("");
 
   const { price, maxGuests } = venue;
+
+  useEffect(() => {
+    const fetchBookedDays = async () => {
+      try {
+        const venueId = await viewVenue(venue.id);
+        const bookingsOnVenue = venueId.bookings || [];
+
+        const days = bookingsOnVenue.flatMap((booking) => {
+          const startDate = new Date(booking.dateFrom);
+          const endDate = new Date(booking.dateTo);
+          const daysArray = [];
+          while (startDate <= endDate) {
+            daysArray.push(new Date(startDate));
+            startDate.setDate(startDate.getDate()+1);
+          }
+          return daysArray;
+        });
+        setBookedDays(days);
+      } catch (error) {
+        console.error("Failed to fetch booked dates:", error);
+      }
+    };
+    fetchBookedDays();
+  }, [venue.id]);
 
   const handleGuests = (count) => {
     setNumberOfGuests(count);
@@ -62,6 +87,8 @@ function BookingForm({ venue }) {
                 onChange={(date) => setStartDate(date)}
                 placeholderText="Select date"
                 className="ms-2 ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+                excludeDates={bookedDays}
+                minDate={new Date()}
               />
             </label>
             <label className="ms-10">
@@ -71,6 +98,8 @@ function BookingForm({ venue }) {
                 onChange={(date) => setEndDate(date)}
                 placeholderText="Select date"
                 className="ms-2 ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+                excludeDates={bookedDays}
+                minDate={startDate || new Date()}
               />
             </label>
           </div>
