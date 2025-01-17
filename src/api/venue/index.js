@@ -3,7 +3,7 @@ import { headers } from "../constants/headers";
 
 export async function viewVenues() {
   try {
-    const response = await fetch(`${VENUES_URL}?sort=created&sortOrder=desc`);
+    const response = await fetch(`${VENUES_URL}?sort=created&sortOrder=desc&_owner=true&_bookings=true`);
     const jsonData = await response.json();
     if (!response.ok) {
       throw new Error(`HTTP status ${response.status}`);
