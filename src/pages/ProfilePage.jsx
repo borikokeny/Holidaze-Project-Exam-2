@@ -3,11 +3,10 @@ import { viewProfile, updateProfile } from "../api/profile";
 import { load } from "../storage";
 import { Link } from "react-router-dom";
 import {
-  MdOutlineCheckBox,
-  MdOutlineCheckBoxOutlineBlank,
   MdOutlineModeEdit,
 } from "react-icons/md";
 import Modal from "../components/Modal";
+import ManagerButton from "../components/ManagerButton";
 import SomePage from "../components/Access";
 
 export default function ProfilePage() {
@@ -105,12 +104,8 @@ export default function ProfilePage() {
           <SomePage />
           <h1 className="text-2xl font-bold">{profile.data.name}</h1>
           <p className="font-bold">{profile.data.email}</p>
-          <div className="flex">
-            <p className="mt-3">Venue manager</p>
-            <div className="flex mt-4 ms-2">
-              <MdOutlineCheckBox />
-              <MdOutlineCheckBoxOutlineBlank />
-            </div>
+          <div className="mt-3">
+          <ManagerButton />
           </div>
           <p to="/MyBookings" className="mt-3 font-semibold">
             Bookings: {profile.data._count.bookings}
@@ -136,7 +131,7 @@ export default function ProfilePage() {
                 />
                 <button
                   type="submit"
-                  className="w-64 mt-2 rounded-none bg-sky-500 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
+                  className="w-64 mt-2 rounded-none bg-gray-700 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
                 >
                   Update your avatar
                 </button>

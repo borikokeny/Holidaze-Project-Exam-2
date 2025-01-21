@@ -16,7 +16,7 @@ const ManagerButton = () => {
   }
 
   if (user.venueManager === true) {
-    return <p className="flex items-center p-2 ps-10 text-gray-700">I am a Venue Manager</p>;
+    return <p className="flex items-center text-gray-700">I am a Venue Manager</p>;
   }
 
   return (
