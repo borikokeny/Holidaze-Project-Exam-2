@@ -162,7 +162,7 @@ const VenueUpdateForm = ({ venue, onClose }) => {
         Address:
         <input
           type="text"
-          name="address"
+          name="location.address"
           value={formData.location.address}
           onChange={handleNewInput}
           className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
@@ -172,7 +172,7 @@ const VenueUpdateForm = ({ venue, onClose }) => {
         City:
         <input
           type="text"
-          name="city"
+          name="location.city"
           value={formData.location.city}
           onChange={handleNewInput}
           className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
@@ -182,6 +182,7 @@ const VenueUpdateForm = ({ venue, onClose }) => {
         ZIP:
         <input
           type="text"
+          name="location.zip"
           value={formData.location.zip}
           onChange={handleNewInput}
           className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
@@ -191,7 +192,7 @@ const VenueUpdateForm = ({ venue, onClose }) => {
         Country:
         <input
           type="text"
-          name="country"
+          name="location.country"
           value={formData.location.country}
           onChange={handleNewInput}
           className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
