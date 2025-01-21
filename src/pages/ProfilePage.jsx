@@ -145,24 +145,6 @@ export default function ProfilePage() {
           )}
         </div>
       </div>
-      {/* <Link
-        to="/MyVenues"
-        className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
-      >
-        My Venues
-      </Link>
-      <Link
-        to="/MyBookings"
-        className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
-      >
-        My Bookings
-      </Link>
-      <Link
-        to="/"
-        className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
-      >
-        Add a Venue
-      </Link> */}
     </div>
   );
 }
