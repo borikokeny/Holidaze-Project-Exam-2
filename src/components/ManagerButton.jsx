@@ -22,10 +22,9 @@ const ManagerButton = () => {
   return (
     <button
     onClick={upgradeToManager}
-    className="p-2 bg-stone-300 text-white rounded hover:bg-orange-300"
+    className="p-2 bg-red-700 text-white rounded hover:bg-orange-300"
     >
       Turn me to Venue Manager
-      {/* <span className="">In order to add a Venue, you need to upgrade to Manager</span> */}
     </button>
   )
 };

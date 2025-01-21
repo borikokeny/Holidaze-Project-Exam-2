@@ -26,7 +26,7 @@ export async function updateProfile(profileData) {
   if (!profileData.name) {
     throw new Error("Update needs a profile name")
   }
-  const response = await fetch(`${PROFILES_URL}/${profileData.name}`, {
+  const response = await fetch(`${PROFILES_URL}/${profileData.name}?_bookings=true&_venues=true`, {
     method: "PUT",
     headers: headers(true),
     body: JSON.stringify(profileData)
