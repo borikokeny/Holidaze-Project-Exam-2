@@ -11,12 +11,20 @@ import Modal from "./Modal";
 import VenueUpdateForm from "./VenueUpdateForm";
 import "react-datepicker/dist/react-datepicker.css";
 import { LuMapPin } from "react-icons/lu";
-import { countries } from "./Countries";
+import { countries, addresses } from "./Countries";
 import BookingForm from "./BookingForm";
 import { NavLink } from "react-bootstrap";
 
-const getCountries = () => {
-  return countries[Math.floor(Math.random() * countries.length)];
+const getLocation = (location) => {
+  const getAddress = addresses[Math.floor(Math.random() * addresses.length)];
+  const getCountries = countries[Math.floor(Math.random() * countries.length)];
+
+  return {
+    address: location?.address || getAddress.address,
+    city: location?.city || getAddress.city,
+    zip: location?.zip || getAddress.zip,
+    country: location?.country || getCountries,
+  };
 };
 
 const VenueCard = ({ venue, onDeleteSuccess }) => {
@@ -40,6 +48,8 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
     location,
     owner,
   } = venue;
+
+  const randomLocation = getLocation(location);
 
   const openForm = () => {
     setOpenModal(true);
@@ -94,7 +104,7 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
           <h1 className="text-2xl font-bold text-stone-600">{name}</h1>
           <div className="flex items-center">
             <LuMapPin className="items-center  me-1" />
-            <h3>{location.country || getCountries()}</h3>
+            <h3>{randomLocation.country}</h3>
           </div>
           <h2 className="w-4/6 text-justify text-lg mt-3 mb-3 text-stone-600">
             {description}
@@ -149,11 +159,11 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
           </div>
 
           <p className="text-lg font-medium mt-3 text-stone-600">Address: </p>
-          <p className="">{location.address}</p>
-          <p className="text-stone-600">{location.city}</p>
-          <p className="text-stone-600">{location.zip}</p>
-          <p className="text-stone-600">{location.country}</p>
-          <p className="text-stone-600">{location.continent}</p>
+          <p className="">{randomLocation.address}</p>
+          <p className="text-stone-600">{randomLocation.city}</p>
+          <p className="text-stone-600">{randomLocation.zip}</p>
+          <p className="text-stone-600">{randomLocation.country}</p>
+          {/* <p className="text-stone-600">{location.continent}</p> */}
         </div>
         <div className="w-1/2">
           <div className="flex justify-end me-4 mb-3">
@@ -189,3 +199,5 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
 };
 
 export default VenueCard;
+
+
