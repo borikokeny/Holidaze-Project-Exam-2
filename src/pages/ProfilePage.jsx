@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { viewProfile, updateProfile } from "../api/profile";
-import { load } from "../storage";
+import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
-import {
-  MdOutlineModeEdit,
-} from "react-icons/md";
+import { MdOutlineModeEdit } from "react-icons/md";
 import Modal from "../components/Modal";
 import ManagerButton from "../components/ManagerButton";
 import SomePage from "../components/Access";
 
 export default function ProfilePage() {
+  const { user } = useAuth();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
 
   useEffect(() => {
+    if (!user?.name) {
+      setLoading(false);
+      return;
+    }
     const fetchProfile = async () => {
       try {
-        const { name } = load("profile");
-        if (!name) {
-          throw new Error("No name found in loaded profile");
-        }
 
-        const profileData = await viewProfile(name);
+        const profileData = await viewProfile(user.name);
+
         if (!profileData || !profileData.data || !profileData.data.name) {
           throw new Error("Profile data is invalid or missing the name field");
         }
@@ -105,7 +105,7 @@ export default function ProfilePage() {
           <h1 className="text-2xl font-bold">{profile.data.name}</h1>
           <p className="font-bold">{profile.data.email}</p>
           <div className="mt-3">
-          <ManagerButton />
+            <ManagerButton />
           </div>
           <p to="/MyBookings" className="mt-3 font-semibold">
             Bookings: {profile.data._count.bookings}
@@ -120,18 +120,21 @@ export default function ProfilePage() {
 
           {openModal && (
             <Modal onClose={closeForm}>
-              <form onSubmit={updateProfileListener}>
+              <form
+                onSubmit={updateProfileListener}
+                className="flex justify-around"
+              >
                 <input
                   type="url"
                   placeholder="Add your new avatar url"
-                  className="border p-2 me-3"
+                  className="border p-2 me-3 w-2/4"
                   value={avatarUrl}
                   onChange={(e) => setAvatarUrl(e.target.value)}
                   required
                 />
                 <button
                   type="submit"
-                  className="w-64 mt-2 rounded-none bg-gray-700 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
+                  className="w-2/5 mt-2 rounded-none bg-gray-700 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
                 >
                   Update your avatar
                 </button>
