@@ -45,12 +45,12 @@ function RegisterForm() {
   };
 
   return (
-    <div className="flex justify-center border-2 w-3/5">
+    <div className="flex justify-center w-3/5">
       <div className="flex justify-around">
         <img src={Santorini} className="w-4/5 h-90 pb-3 mt-3" />
       </div>
       <form onSubmit={registerFormListener} className="flex mt-3 mb-3 pe-8">
-        <div className="border rounded-md p-6 bg-gray-100">
+        <div className="border p-6 bg-gray-100">
           <input
             type="name"
             value={formData.name}
