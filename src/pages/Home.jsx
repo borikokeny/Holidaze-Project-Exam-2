@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { viewVenues } from "../api/venue";
-import { useOutletContext } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import VenueList from "../components/VenueList";
 
 export default function Home() {
-  const { searchValue } = useOutletContext();
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchParams] = useSearchParams();
+
+  const searchValue = searchParams.get("search") || "";
 
   useEffect(() => {
     const fetchData = async () => {
