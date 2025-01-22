@@ -68,8 +68,8 @@ function RegisterForm() {
               setFormData({ ...formData, email: e.target.value })
             }
             required
-            pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
-            title="Only @(stud).noroff.no domains are allowed"
+            pattern="^[\w\-.]+@stud\.?noroff\.no$"
+            title="Only @stud.noroff.no domains are allowed"
             placeholder="Email"
             className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
           />
