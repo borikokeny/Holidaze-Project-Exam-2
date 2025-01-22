@@ -126,7 +126,7 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
           </div>
 
           <hr className="border-t-2 border-gray-300 mt-3 mb-3 w-4/6" />
-          <Ratings />
+          <Ratings rating={venue.rating} />
 
           <p className="text-lg mb-3 text-stone-600">
             Max guests: {maxGuests} person

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { updateVenue } from "../api/venue";
+import Ratings from "./ratings";
+import { Rating } from "@material-tailwind/react";
 
 const VenueUpdateForm = ({ venue, onClose }) => {
   const [formData, setFormData] = useState({
@@ -8,6 +10,7 @@ const VenueUpdateForm = ({ venue, onClose }) => {
     media: venue?.media || [],
     price: venue?.price || "",
     maxGuests: venue?.maxGuests || "",
+    rating: venue?.rating || 0,
     meta: {
       wifi: venue?.meta?.wifi || false,
       parking: venue?.meta?.parking || false,
@@ -68,7 +71,7 @@ const VenueUpdateForm = ({ venue, onClose }) => {
   };
 
   return (
-    <form onSubmit={handleUpdate}>
+    <form onSubmit={handleUpdate} className="">
       <label>
         Name:
         <input
@@ -118,8 +121,18 @@ const VenueUpdateForm = ({ venue, onClose }) => {
           className="border p-2 w-full"
         />
       </label>
-      <div className="flex">
-        <label>
+      <Ratings 
+      rating={formData.rating}
+      isInteractive={true}
+      onChange={(value) =>
+        setFormData((prev) => ({
+          ...prev,
+          rating: value,
+        }))
+      }
+      />
+      <div className="flex mt-2">
+        <label className="me-2">
           <input
             type="checkbox"
             name="meta.wifi"
@@ -139,7 +152,7 @@ const VenueUpdateForm = ({ venue, onClose }) => {
         </label>
       </div>
       <div>
-        <label>
+        <label className="me-2">
           <input
             type="checkbox"
             name="meta.breakfast"
@@ -200,7 +213,7 @@ const VenueUpdateForm = ({ venue, onClose }) => {
       </label>
       <button
         type="submit"
-        className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700"
+        className="mt-4 px-4 py-2 bg-gray-700 text-white rounded hover:bg-green-700"
       >
         Update Venue
       </button>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addVenue } from "../api/venue";
+import Ratings from "../components/ratings";
 
 function VenueForm() {
   const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ function VenueForm() {
     media: [],
     price: "",
     maxGuests: "",
-    rating: "",
+    rating: 0,
     meta: {
       wifi: false,
       parking: false,
@@ -64,13 +65,11 @@ function VenueForm() {
   };
 
   return (
-    <div className="justify-center w-3/5">
-      <div>
-        <h1 className="">Add a Venue</h1>
-      </div>
+    <div className="justify-center w-3/5 font-main">
       <div>
         <form onSubmit={venueFormListener} className="flex mt-3 mb-3 pe-8">
-          <div className="border rounded-md p-6 bg-gray-100">
+          <div className="border w-2/3 rounded-md p-6 bg-gray-100">
+            <h1 className="mb-3 text-2xl">Add a Venue</h1>
             <input
               type="name"
               value={formData.name}
@@ -120,8 +119,15 @@ function VenueForm() {
               required
               className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
             />
+            <Ratings
+              rating={formData.rating}
+              isInteractive={true}
+              onChange={(value) =>
+                setFormData((prev) => ({ ...prev, rating: value }))
+              }
+            />
             <div className="flex">
-              <label>
+              <label className="me-2">
                 <input
                   type="checkbox"
                   value={formData.meta.wifi}
@@ -148,8 +154,8 @@ function VenueForm() {
                 Parking
               </label>
             </div>
-            <div>
-              <label>
+            <div className="mb-2">
+              <label className="me-2">
                 <input
                   type="checkbox"
                   value={formData.meta.breakfast}
@@ -227,7 +233,7 @@ function VenueForm() {
             <div>
               <button
                 type="submit"
-                className="w-64 mt-2 bg-green-800 rounded-none bg-sky-500 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
+                className="w-full mt-2 rounded-none bg-gray-700 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
               >
                 Publish Venue
               </button>
