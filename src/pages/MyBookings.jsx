@@ -5,14 +5,17 @@ import { viewProfile } from "../api/profile";
 import placeholderImage from "../images/Placeholder.jpg";
 
 export default function MyBookings() {
-  const { user } = useAuth(); 
+  const { user } = useAuth();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!user?.name) {
+      setLoading(false);
+      return;
+    }
     const fetchProfile = async () => {
-      setLoading(true);
       try {
         const profileData = await viewProfile(user.name);
         setBookings(profileData.data.bookings || []);
@@ -24,7 +27,7 @@ export default function MyBookings() {
     };
 
     fetchProfile();
-  }, [user.name]);
+  }, [user?.name]);
 
   if (loading) {
     return <p>Loading your bookings...</p>;
@@ -32,6 +35,10 @@ export default function MyBookings() {
 
   if (error) {
     return <p>{error}</p>;
+  }
+
+  if (!user?.name) {
+    return <p>You need to log in to access this page.</p>;
   }
 
   if (!bookings || bookings.length === 0) {
@@ -93,7 +100,9 @@ export default function MyBookings() {
                   Dates: {preparedData.dateFrom} - {preparedData.dateTo}
                 </p>
                 <p className="text-sm text-gray-600">Booked Nights: {days}</p>
-                <p className="text-sm text-gray-600">Total Price: {total} NOK</p>
+                <p className="text-sm text-gray-600">
+                  Total Price: {total} NOK
+                </p>
                 <p className="text-sm text-gray-600">
                   Location: {booking.venue.location.city},{" "}
                   {booking.venue.location.country}
