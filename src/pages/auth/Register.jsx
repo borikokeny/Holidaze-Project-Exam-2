@@ -51,7 +51,7 @@ function RegisterForm() {
         <img src={Santorini} className="w-4/5 h-90 pb-3 mt-3" />
       </div>
       <form onSubmit={registerFormListener} className="flex mt-3 mb-3 pe-8">
-        <div className="border p-6 bg-gray-100">
+        <div className="border p-6">
           <input
             type="name"
             value={formData.name}
@@ -107,13 +107,13 @@ function RegisterForm() {
                   venueManager: false,
                 }));
               }}
-              className={`w-32 mt-2 rounded-full px-3 py-2 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+              className={`w-32 mt-2 rounded-none px-3 py-2 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
                 customerAccount
                   ? "bg-teal-800 text-white"
                   : "bg-teal-500 text-white hover:bg-teal-800"
               }`}
             >
-              {customerAccount ? "Customer Selected" : "Customer"}
+              Customer
             </button>
             <button
               type="button"
@@ -124,13 +124,12 @@ function RegisterForm() {
                   venueManager: true,
                 }));
               }}
-              className={`w-32 mt-2 rounded-full px-3 py-2 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+              className={`w-32 mt-2 rounded-none px-3 py-2 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
                 formData.venueManager
                   ? "bg-teal-800 text-white"
                   : "bg-teal-500 text-white hover:bg-teal-800"
               }`}
-            >
-              {formData.venueManager ? "Manager Selected" : "Manager"}
+            > Manager
             </button>
           </div>
 
