@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { register } from "../../api/auth/register";
+import { Link } from "react-router-dom";
 import Santorini from "../../images/Santorini.png";
 
 function RegisterForm() {
@@ -45,7 +46,7 @@ function RegisterForm() {
   };
 
   return (
-    <div className="flex justify-center w-3/5">
+    <div className="flex justify-center w-3/5 font-main">
       <div className="flex justify-around">
         <img src={Santorini} className="w-4/5 h-90 pb-3 mt-3" />
       </div>
@@ -140,6 +141,11 @@ function RegisterForm() {
             >
               Sign in
             </button>
+          </div>
+          <div className="mt-3">
+            <p>Already Have an Account?</p>
+            <strong><Link to="/auth/Login">Log in</Link></strong>
+          
           </div>
           {error && <p className="text-red-500">{error}</p>}
         </div>

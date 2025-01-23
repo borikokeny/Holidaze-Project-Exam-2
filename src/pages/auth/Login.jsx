@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../../api/auth/login";
 import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 import Mountains from "../../images/Mountains.png";
 
 const LoginForm = ({ redirect = true, onLoginSuccess }) => {
@@ -36,7 +37,7 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center font-main">
       <div className="flex justify-around">
         <img src={Mountains} className="w-4/5 h-90 pb-3 mt-3" />
       </div>
@@ -70,6 +71,11 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
             >
               Log in
             </button>
+          </div>
+          <div className="mt-3">
+            <p>Create an Account</p>
+            <strong><Link to="/auth/Register">Sign in</Link></strong>
+          
           </div>
         </div>
       </form>
