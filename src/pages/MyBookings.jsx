@@ -96,13 +96,13 @@ export default function MyBookings() {
           return (
             <div
               key={booking.id}
-              className="border rounded-lg p-4 shadow-md hover:shadow-lg"
+              className="border rounded-none p-4 shadow-md hover:shadow-lg"
             >
               <Link to={`/venuePage/${booking.venue.id}`}>
                 <img
                   src={booking.venue.media?.[0]?.url || placeholderImage}
                   alt={booking.venue.media?.[0]?.alt || "Venue image"}
-                  className="w-full h-48 object-cover rounded-md mb-2"
+                  className="w-full h-48 object-cover rounded-none mb-2"
                 />
                 <h2 className="text-lg font-bold">{booking.venue.name}</h2>
                 <p className="text-sm text-gray-600">

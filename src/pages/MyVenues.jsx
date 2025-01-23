@@ -66,12 +66,12 @@ function MyVenues() {
       <h1 className="text-2xl font-bold mb-4">My Venues</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {venues.map((venue) => (
-          <div key={venue.id} className="border rounded-lg p-4 shadow-md hover:shadow-lg">
+          <div key={venue.id} className="border rounded-none p-4 shadow-md hover:shadow-lg">
             <Link to={`/venuePage/${venue.id}`}>
               <img
                 src={venue.media?.[0]?.url || placeholderImage}
                 alt={venue.media?.[0]?.alt || "Venue image"}
-                className="w-full h-48 object-cover rounded-md mb-2"
+                className="w-full h-48 object-cover rounded-none mb-2"
               />
               <h2 className="text-lg font-bold">{venue.name}</h2>
               <p className="text-sm text-gray-600">{venue.description}</p>  <p className="text-sm text-gray-600 mt-2">Price: {venue.price} NOK / night</p>
