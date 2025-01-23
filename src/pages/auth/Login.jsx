@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../../api/auth/login";
 import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 import Mountains from "../../images/Mountains.png";
 
 const LoginForm = ({ redirect = true, onLoginSuccess }) => {
@@ -36,12 +37,12 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
   };
 
   return (
-    <div className="flex justify-center border-2 w-3/5">
+    <div className="flex justify-center font-main">
       <div className="flex justify-around">
         <img src={Mountains} className="w-4/5 h-90 pb-3 mt-3" />
       </div>
       <form onSubmit={loginFormListener} className="flex mt-3 mb-3 pe-8">
-        <div className="border rounded-md p-6 bg-gray-100">
+        <div className="border p-6 bg-gray-100">
           <input
             type="email"
             value={formData.email}
@@ -66,10 +67,15 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
           <div>
             <button
               type="submit"
-              className="w-64 mt-2 rounded-none bg-sky-500 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
+              className="w-64 mt-2 rounded-none bg-gray-700 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
             >
               Log in
             </button>
+          </div>
+          <div className="mt-3">
+            <p>Create an Account</p>
+            <strong><Link to="/auth/Register">Sign in</Link></strong>
+          
           </div>
         </div>
       </form>

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import Modal from "./Modal"
+import Modal from "./Modal";
 import LoginForm from "../pages/auth/login";
 
-const ReserveButton = () => {
+const ReserveButton = ({ onReserve }) => {
   const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -11,12 +11,12 @@ const ReserveButton = () => {
     if (!user) {
       setIsModalOpen(true);
     } else {
-      alert("Venue reserved successfully!");
+      onReserve(); 
     }
   };
 
   const handleLoginSuccess = () => {
-    setIsModalOpen(false); // Close the modal after successful login
+    setIsModalOpen(false);
     alert("You are now logged in!");
   };
 
@@ -24,7 +24,7 @@ const ReserveButton = () => {
     <>
       <button
         onClick={handleReserveClick}
-        className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        className="p-2 bg-gray-700 text-white rounded hover:bg-gray-900 w-full"
       >
         Reserve
       </button>
@@ -34,7 +34,6 @@ const ReserveButton = () => {
           <h2 className="text-lg font-bold">You need to be logged in</h2>
           <p className="mb-4">Please log in to reserve a venue.</p>
           <LoginForm redirect={false} onLoginSuccess={handleLoginSuccess} />
-        
         </Modal>
       )}
     </>
@@ -42,3 +41,4 @@ const ReserveButton = () => {
 };
 
 export default ReserveButton;
+

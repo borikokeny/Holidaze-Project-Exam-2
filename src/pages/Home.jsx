@@ -1,15 +1,35 @@
-import React from "react";
-import useApi from "../hooks/api";
-import { VENUES_URL } from "../api/constants";
-import { useOutletContext } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { viewVenues } from "../api/venue";
+import { useSearchParams } from "react-router-dom";
 import VenueList from "../components/VenueList";
 
 export default function Home() {
-  const { searchValue } = useOutletContext();
-  const url = `${VENUES_URL}?sort=created&sortOrder=desc`;
-  const { data } = useApi(url);
+  const [venues, setVenues] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchParams] = useSearchParams();
 
-  const filteredVenues = data?.filter((venue) => {
+  const searchValue = searchParams.get("search") || "";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await viewVenues();
+        setVenues(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) return <p>Loading venues...</p>;
+  if (error) return <p>Error loading venues: {error}</p>;
+
+  const filteredVenues = venues.filter((venue) => {
     const venueName = venue.name.trim().toLowerCase();
     const searchValueLowerCase = searchValue.trim().toLowerCase();
 
@@ -22,16 +42,14 @@ export default function Home() {
         {searchValue ? (
           <>
             <h2 className="text-xl font-bold mb-4">Search Results</h2>
-            {filteredVenues && filteredVenues.length > 0 ? (
+            {filteredVenues.length > 0 ? (
               <VenueList venues={filteredVenues} />
             ) : (
               <p>No venues match your search.</p>
             )}
           </>
         ) : (
-          <>
-            <VenueList venues={data} />
-          </>
+          <VenueList venues={venues} />
         )}
       </main>
     </div>

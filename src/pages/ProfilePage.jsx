@@ -1,35 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { viewProfile, updateProfile } from "../api/profile";
-import { load } from "../storage";
+import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
-import {
-  MdOutlineCheckBox,
-  MdOutlineCheckBoxOutlineBlank,
-  MdOutlineModeEdit,
-} from "react-icons/md";
+import { MdOutlineModeEdit } from "react-icons/md";
+import Modal from "../components/Modal";
+import ManagerButton from "../components/ManagerButton";
 import SomePage from "../components/Access";
 
 export default function ProfilePage() {
+  const { user } = useAuth();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
 
   useEffect(() => {
+    if (!user?.name) {
+      setLoading(false);
+      return;
+    }
     const fetchProfile = async () => {
       try {
-        const { name } = load("profile");
-        if (!name) {
-          throw new Error("No name found in loaded profile");
-        }
 
-        const profileData = await viewProfile(name);
+        const profileData = await viewProfile(user.name);
+
         if (!profileData || !profileData.data || !profileData.data.name) {
           throw new Error("Profile data is invalid or missing the name field");
         }
 
         setProfile(profileData);
-        // console.log("Fetched profile:", profileData); // Debugging log
       } catch (error) {
         console.error("Failed to fetch profile:", error);
       } finally {
@@ -40,11 +39,16 @@ export default function ProfilePage() {
   }, []);
 
   const openForm = () => {
-    setIsFormVisible((prev) => !prev);
+    setOpenModal(true);
+  };
+
+  const closeForm = () => {
+    setOpenModal(false);
+    setAvatarUrl("");
   };
 
   const updateProfileListener = async (e) => {
-    e.preventDefault(); // Prevent form reload
+    e.preventDefault();
 
     try {
       if (!avatarUrl) {
@@ -56,19 +60,11 @@ export default function ProfilePage() {
         throw new Error("Profile name is missing");
       }
 
-      // console.log("Updating profile with:", {
-      //   name: profileName,
-      //   avatar: { url: avatarUrl },
-      // });
-
       const updatedProfile = await updateProfile({
         name: profileName,
         avatar: { url: avatarUrl },
       });
 
-      // console.log("Updated profile data:", updatedProfile);
-
-      // Update the profile in state and hide the form
       setProfile((prev) => ({
         ...prev,
         data: {
@@ -76,8 +72,9 @@ export default function ProfilePage() {
           avatar: updatedProfile.data.avatar,
         },
       }));
-      setAvatarUrl(""); // Clear the input field
-      setIsFormVisible(false); // Hide the form
+
+      closeForm();
+
       alert("Profile updated successfully!");
     } catch (error) {
       console.error("Failed to update profile:", error);
@@ -107,14 +104,10 @@ export default function ProfilePage() {
           <SomePage />
           <h1 className="text-2xl font-bold">{profile.data.name}</h1>
           <p className="font-bold">{profile.data.email}</p>
-          <div className="flex">
-            <p className="mt-3">Venue manager</p>
-            <div className="flex mt-4 ms-2">
-              <MdOutlineCheckBox />
-              <MdOutlineCheckBoxOutlineBlank />
-            </div>
+          <div className="mt-3">
+            <ManagerButton />
           </div>
-          <p className="mt-3 font-semibold">
+          <p to="/MyBookings" className="mt-3 font-semibold">
             Bookings: {profile.data._count.bookings}
           </p>
           <p className="font-semibold">Venues: {profile.data._count.venues}</p>
@@ -124,46 +117,32 @@ export default function ProfilePage() {
           >
             <MdOutlineModeEdit />
           </button>
-          {isFormVisible && (
-            <div>
-              <form onSubmit={updateProfileListener}>
+
+          {openModal && (
+            <Modal onClose={closeForm}>
+              <form
+                onSubmit={updateProfileListener}
+                className="flex justify-around"
+              >
                 <input
                   type="url"
                   placeholder="Add your new avatar url"
-                  className="border p-2 me-3"
+                  className="border p-2 me-3 w-2/4"
                   value={avatarUrl}
-                  onChange={(e) => setAvatarUrl(e.target.value)} // Update state on input change
+                  onChange={(e) => setAvatarUrl(e.target.value)}
                   required
                 />
                 <button
                   type="submit"
-                  className="w-64 mt-2 rounded-none bg-sky-500 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
+                  className="w-2/5 mt-2 rounded-none bg-gray-700 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
                 >
                   Update your avatar
                 </button>
               </form>
-            </div>
+            </Modal>
           )}
         </div>
       </div>
-      <Link
-        to="/MyVenues"
-        className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
-      >
-        My Venues
-      </Link>
-      <Link
-        to="/MyBookings"
-        className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
-      >
-        My Bookings
-      </Link>
-      <Link
-        to="/"
-        className="p-9 border rounded-md shadow-lg shadow-cyan-500/50"
-      >
-        Add a Venue
-      </Link>
     </div>
   );
 }

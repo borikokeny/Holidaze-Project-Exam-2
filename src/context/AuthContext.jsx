@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { updateProfile, viewProfile } from "../api/profile";
 
 const AuthContext = createContext();
 
@@ -9,18 +10,38 @@ export const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("profile");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+    const fetchProfile = async () => {
+      try {
+        const storedUser = localStorage.getItem("profile");
+        if (!storedUser) return;
+
+        const { name } = JSON.parse(storedUser);
+        if (!name) throw new Error("Profile name is missing");
+
+        const profileData = await viewProfile(name);
+        if (!profileData || !profileData.data) throw new Error("Invalid profile data");
+
+        setUser(profileData.data); 
+        localStorage.setItem("profile", JSON.stringify(profileData.data));
+      } catch (error) {
+        console.error("Failed to fetch profile:", error);
+      }
+    };
+
+    fetchProfile();
   }, []);
 
   const login = (userData) => {
-    console.log("Login Response Data:", userData);
+    if (!userData.name) {
+      console.error("Login response missing user name.");
+      return;
+    }
+
     const updatedUser = {
       ...userData,
       venueManager: userData.venueManager ?? false,
     };
+
     setUser(updatedUser);
     localStorage.setItem("profile", JSON.stringify(updatedUser));
   };
@@ -30,11 +51,23 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("profile");
   };
 
-  const upgradeToManager = () => {
-    if (user) {
-      const updatedUser = { ...user, venueManager: true };
-      setUser(updatedUser);
-      localStorage.setItem("profile", JSON.stringify(updatedUser));
+  const upgradeToManager = async () => {
+    if (!user || !user.name) {
+      console.error("User is not logged in or missing name.");
+      return;
+    }
+
+    try {
+      const updatedProfile = await updateProfile({
+        name: user.name,
+        venueManager: true,
+      });
+
+      setUser(updatedProfile.data);
+      localStorage.setItem("profile", JSON.stringify(updatedProfile.data));
+      console.log("User successfully upgraded to manager.");
+    } catch (error) {
+      console.error("Failed to upgrade user to manager:", error.message);
     }
   };
 
@@ -46,3 +79,4 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
+

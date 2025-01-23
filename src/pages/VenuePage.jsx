@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { VENUES_URL } from "../api/constants";
+import { viewVenue } from "../api/venue";
 import VenueCard from "../components/VenueCard";
 
 function Venue() {
@@ -10,15 +10,10 @@ function Venue() {
   useEffect(() => {
     const fetchVenue = async () => {
       try {
-        const response = await fetch(`${VENUES_URL}/${venueId}?_owner=true`);
-        const jsonData = await response.json();
-        if (!response.ok) {
-          throw new Error(`HTTP status ${response.status}`);
-        }
-        setVenue(jsonData.data);
-        console.log(jsonData.data);
+        const data = await viewVenue(venueId);
+        setVenue(data);
       } catch (error) {
-        console.error("Failed to fetch product:", error);
+        console.error("Error fetching venue:", error);
       }
     };
 
@@ -33,3 +28,4 @@ function Venue() {
 }
 
 export default Venue;
+

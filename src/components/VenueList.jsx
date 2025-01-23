@@ -2,23 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Media from "./media";
 import { LuMapPin } from "react-icons/lu";
+import { getCountries } from "./Countries";
 
 export default function VenueList({ venues }) {
   if (!venues || venues.length === 0) {
     return <p>No venues match your search.</p>;
   }
 
+  const randomCountry = getCountries();
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+    <div className="max-w-5xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
       {venues.map((venue) => {
         const { id, name, media, price, location } = venue;
-
-        // let createdDate = "N/A";
-        // if (created) {
-        //   let createdDateObj = new Date(created);
-        //   createdDate = createdDateObj.toLocaleDateString();
-        // }
-
         return (
           <div key={id}>
             <Link to={`/venuePage/${id}`}>
@@ -34,11 +30,11 @@ export default function VenueList({ venues }) {
                     <Media media={[media[0]]} className="" />
                   )}
                 </div>
-                <div className="text-stone-800">
+                <div className="text-gray-800">
                   <h1 className="font-semibold mt-1">{name}</h1>
-                  <div className="flex">
-                  <LuMapPin className="mt-1 me-1"/>
-                  <h3>{location.country}</h3>
+                  <div className="flex items-center">
+                  <LuMapPin className="items-center  me-1"/>
+                  <h3>{location.country || randomCountry}</h3>
                   </div>
                   <h3><strong>{price} nok</strong>/night</h3>
                 </div>
