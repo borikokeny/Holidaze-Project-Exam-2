@@ -3,13 +3,25 @@ import { viewVenues } from "../api/venue";
 import { Link } from "react-router-dom";
 import placeholderImage from "../images/Placeholder.jpg";
 import { useAuth } from "../context/AuthContext";
+import { getCountries, getAddress } from "../components/Countries";
+
+const getLocation = (location) => {
+  const randomAddress = getAddress();
+  const randomCountry = getCountries();
+
+  return {
+    city: location?.city || randomAddress.city,
+    country: location?.country || randomCountry,
+  };
+};
 
 function MyVenues() {
   const { user } = useAuth(); 
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const randomLocation = getLocation(location);
+  
   useEffect(() => {
     const fetchVenues = async () => {
       setLoading(true);
@@ -50,7 +62,7 @@ function MyVenues() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 font-main">
       <h1 className="text-2xl font-bold mb-4">My Venues</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {venues.map((venue) => (
@@ -64,7 +76,7 @@ function MyVenues() {
               <h2 className="text-lg font-bold">{venue.name}</h2>
               <p className="text-sm text-gray-600">{venue.description}</p>  <p className="text-sm text-gray-600 mt-2">Price: {venue.price} NOK / night</p>
               <p className="text-sm text-gray-600">
-                Location: {venue.location.city}, {venue.location.country}
+                Location: {venue.location.city || randomLocation.city}, {venue.location.country || randomLocation.country}
               </p>
 
               {venue.bookings?.length > 0 ? (

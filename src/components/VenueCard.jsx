@@ -11,19 +11,19 @@ import Modal from "./Modal";
 import VenueUpdateForm from "./VenueUpdateForm";
 import "react-datepicker/dist/react-datepicker.css";
 import { LuMapPin } from "react-icons/lu";
-import { countries, addresses } from "./Countries";
+import { getCountries, getAddress } from "./Countries";
 import BookingForm from "./BookingForm";
 import { NavLink } from "react-bootstrap";
 
 const getLocation = (location) => {
-  const getAddress = addresses[Math.floor(Math.random() * addresses.length)];
-  const getCountries = countries[Math.floor(Math.random() * countries.length)];
+  const randomAddress = getAddress();
+  const randomCountry = getCountries();
 
   return {
-    address: location?.address || getAddress.address,
-    city: location?.city || getAddress.city,
-    zip: location?.zip || getAddress.zip,
-    country: location?.country || getCountries,
+    address: location?.address || randomAddress.address,
+    city: location?.city || randomAddress.city,
+    zip: location?.zip || randomAddress.zip,
+    country: location?.country || randomCountry,
   };
 };
 
@@ -163,7 +163,6 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
           <p className="text-stone-600">{randomLocation.city}</p>
           <p className="text-stone-600">{randomLocation.zip}</p>
           <p className="text-stone-600">{randomLocation.country}</p>
-          {/* <p className="text-stone-600">{location.continent}</p> */}
         </div>
         <div className="w-1/2">
           <div className="flex justify-end me-4 mb-3">

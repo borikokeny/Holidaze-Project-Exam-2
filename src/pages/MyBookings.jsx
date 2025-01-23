@@ -3,12 +3,24 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { viewProfile } from "../api/profile";
 import placeholderImage from "../images/Placeholder.jpg";
+import { getCountries, getAddress } from "../components/Countries";
+
+const getLocation = (location) => {
+  const randomAddress = getAddress();
+  const randomCountry = getCountries();
+
+  return {
+    city: location?.city || randomAddress.city,
+    country: location?.country || randomCountry,
+  };
+};
 
 export default function MyBookings() {
   const { user } = useAuth();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const randomLocation = getLocation(location);
 
   useEffect(() => {
     if (!user?.name) {
@@ -70,7 +82,7 @@ export default function MyBookings() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 font-main">
       <h1 className="text-2xl font-bold mb-4">My Bookings</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {bookings.map((booking) => {
@@ -104,8 +116,8 @@ export default function MyBookings() {
                   Total Price: {total} NOK
                 </p>
                 <p className="text-sm text-gray-600">
-                  Location: {booking.venue.location.city},{" "}
-                  {booking.venue.location.country}
+                  Location: {booking.venue.location.city || randomLocation.city},{" "}
+                  {booking.venue.location.country || randomLocation.country}
                 </p>
               </Link>
             </div>

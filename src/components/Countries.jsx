@@ -37,3 +37,11 @@ export const addresses = [
     "zip": "25956",
   },
 ]
+
+export const getCountries = () => {
+  return countries[Math.floor(Math.random() * countries.length)];
+}
+
+export const getAddress = () => {
+  return addresses[Math.floor(Math.random() * addresses.length)];
+}
