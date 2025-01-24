@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Media from "./media";
+// import Media from "./media";
+import Media from "./Media";
 import { LuMapPin } from "react-icons/lu";
 import { getCountries } from "./Countries";
 

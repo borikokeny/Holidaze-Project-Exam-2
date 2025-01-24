@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { updateVenue } from "../api/venue";
-import Ratings from "./ratings";
-import { Rating } from "@material-tailwind/react";
+import Ratings from "./Ratings";
 
 const VenueUpdateForm = ({ venue, onClose }) => {
   const [formData, setFormData] = useState({
