@@ -37,7 +37,7 @@ export default function Home() {
   });
 
   return (
-    <div id="main-container">
+    <div id="main-container font-main">
       <main className="shadow-md p-4">
         {searchValue ? (
           <>

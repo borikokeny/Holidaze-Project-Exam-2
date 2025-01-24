@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import Modal from "./Modal";
-import LoginForm from "../pages/auth/login";
+// import LoginForm from "../pages/auth/login";
+import { LoginForm } from "../pages";
 
 const ReserveButton = ({ onReserve }) => {
   const { user } = useAuth();
