@@ -9,5 +9,5 @@ import MyVenues from "./MyVenues";
 import VenueForm from "./VenueForm";
 
 export {
-  Home, Venue, ProfilePage, RegisterForm, LoginForm, MyBookings, MyVenues, VenueForm, Venue
+  Home, Venue, ProfilePage, RegisterForm, LoginForm, MyBookings, MyVenues, VenueForm
 }
