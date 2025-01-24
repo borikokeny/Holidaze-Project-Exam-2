@@ -6,14 +6,13 @@ import { MdOutlinePets, MdFreeBreakfast } from "react-icons/md";
 import { FaWifi, FaParking } from "react-icons/fa";
 import { Carousel } from "@material-tailwind/react";
 import placeholderImage from "../images/Placeholder.jpg";
-import Ratings from "./ratings";
+import Ratings from "./Ratings";
 import Modal from "./Modal";
 import VenueUpdateForm from "./VenueUpdateForm";
 import "react-datepicker/dist/react-datepicker.css";
 import { LuMapPin } from "react-icons/lu";
 import { getCountries, getAddress } from "./Countries";
 import BookingForm from "./BookingForm";
-import { NavLink } from "react-bootstrap";
 
 const getLocation = (location) => {
   const randomAddress = getAddress();
