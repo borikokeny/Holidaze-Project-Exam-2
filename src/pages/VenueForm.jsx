@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addVenue } from "../api/venue";
-import Ratings from "../components/ratings";
+import Ratings from "../components/Ratings";
 
 function VenueForm() {
   const [formData, setFormData] = useState({
