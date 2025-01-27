@@ -1,21 +1,21 @@
-import React from "react";
-import { useAuth } from "../context/AuthContext";
+// import React from "react";
+// import { useAuth } from "../context/AuthContext";
 
-// export const RegisteredUser = () => {
+// // export const RegisteredUser = () => {
 
-// }
-const SomePage = () => {
-  const { user } = useAuth();
+// // }
+// const SomePage = () => {
+//   const { user } = useAuth();
 
-  if (!user) {
-    return <p>Please log in to access this page.</p>;
-  }
+//   if (!user) {
+//     return <p>Please log in to access this page.</p>;
+//   }
 
-  return (
-    <div>
-      <h1>Welcome, {user.name}!</h1>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <h1>Welcome, {user.name}!</h1>
+//     </div>
+//   );
+// };
 
-export default SomePage;
+// export default SomePage;
