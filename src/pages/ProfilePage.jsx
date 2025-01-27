@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { viewProfile, updateProfile } from "../api/profile";
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
-import { MdOutlineModeEdit } from "react-icons/md";
+import { FiCamera } from "react-icons/fi";
 import Modal from "../components/Modal";
 import ManagerButton from "../components/ManagerButton";
-import SomePage from "../components/Access";
+import { logout } from "../api/auth/logout";
 
 export default function ProfilePage() {
   const { user } = useAuth();
@@ -21,7 +20,6 @@ export default function ProfilePage() {
     }
     const fetchProfile = async () => {
       try {
-
         const profileData = await viewProfile(user.name);
 
         if (!profileData || !profileData.data || !profileData.data.name) {
@@ -91,55 +89,67 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="mb-11">
-      <div className="flex flex-row items-center mb-12">
-        <div className="w-60 place-items-center">
+    <div className="mb-11 border rounded-md w-full sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto">
+      <div className="grid justify-items-center mb-12 p-4 sm:p-6">
+        <div className="w-40 sm:w-52 md:w-60 place-items-center relative">
           <img
             src={profile.data.avatar.url}
             alt="Avatar"
-            className="object-cover rounded-full mt-6 w-60 h-60"
+            className="object-cover rounded-full mt-6 w-40 h-40 sm:w-52 sm:h-52 md:w-60 md:h-60"
           />
-        </div>
-        <div className="ms-6 mt-12">
-          <SomePage />
-          <h1 className="text-2xl font-bold">{profile.data.name}</h1>
-          <p className="font-bold">{profile.data.email}</p>
-          <div className="mt-3">
-            <ManagerButton />
-          </div>
-          <p to="/MyBookings" className="mt-3 font-semibold">
-            Bookings: {profile.data._count.bookings}
-          </p>
-          <p className="font-semibold">Venues: {profile.data._count.venues}</p>
           <button
             onClick={openForm}
-            className="p-2 bg-gray-200 rounded-full hover:bg-gray-300"
+            className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 absolute bottom-2 right-2"
           >
-            <MdOutlineModeEdit />
+            <FiCamera />
           </button>
-
+        </div>
+        <div className="mt-5 text-center">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+            {profile.data.name}
+          </h1>
+          <div className="mt-2">
+            <ManagerButton />
+          </div>
           {openModal && (
             <Modal onClose={closeForm}>
-              <form
-                onSubmit={updateProfileListener}
-                className="flex justify-around"
-              >
+              <form onSubmit={updateProfileListener} className="grid gap-4 p-4">
                 <input
                   type="url"
-                  placeholder="Add your new avatar url"
-                  className="border p-2 me-3 w-2/4"
+                  placeholder="Add your new avatar URL"
+                  className="border p-2 rounded w-full"
                   value={avatarUrl}
                   onChange={(e) => setAvatarUrl(e.target.value)}
                   required
                 />
                 <button
                   type="submit"
-                  className="w-2/5 mt-2 rounded-none bg-gray-700 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
+                  className="rounded bg-gray-700 px-3 py-2 text-sm sm:text-base font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
                 >
                   Update your avatar
                 </button>
               </form>
             </Modal>
+          )}
+        </div>
+        <div className="w-full mt-4 space-y-3">
+          <p className="font-bold border p-3 text-center sm:text-left">
+            {profile.data.email}
+          </p>
+          <p className="font-semibold border p-3 text-center sm:text-left">
+            Bookings: {profile.data._count.bookings}
+          </p>
+          <p className="font-semibold border p-3 text-center sm:text-left">
+            Venues: {profile.data._count.venues}
+          </p>
+          {user && (
+            <button
+              onClick={logout}
+              id="logOut"
+              className="flex justify-center mt-5 w-full p-2 bg-gray-700 text-white rounded hover:bg-gray-900"
+            >
+              Log out
+            </button>
           )}
         </div>
       </div>
