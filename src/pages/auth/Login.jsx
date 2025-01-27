@@ -37,12 +37,19 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
   };
 
   return (
-    <div className="flex justify-center font-main">
-      <div className="flex justify-around">
-        <img src={Mountains} className="w-4/5 h-90 pb-3 mt-3" />
-      </div>
-      <form onSubmit={loginFormListener} className="flex mt-3 mb-3 pe-8">
-        <div className="border p-6 bg-gray-100">
+    <div className="font-main w-full max-w-6xl mx-auto p-4">
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex justify-center md:w-1/2">
+          <img
+            src={Mountains}
+            className="w-full max-w-lg h-auto rounded-none shadow-md"
+            alt="Mountains"
+          />
+        </div>
+        <form
+          onSubmit={loginFormListener}
+          className="bg-white border rounded-none shadow-lg p-6 w-full md:w-1/2"
+        >
           <input
             type="email"
             value={formData.email}
@@ -51,7 +58,7 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
             }
             placeholder="Email"
             required
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            className="ps-2 block w-full rounded-none mb-3 border border-gray-300 py-2 text-gray-900 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm"
           />
           <input
             type="password"
@@ -61,24 +68,28 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
             }
             placeholder="Password"
             required
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            className="ps-2 block w-full rounded-none mb-3 border border-gray-300 py-2 text-gray-900 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm"
           />
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
           <div>
             <button
               type="submit"
-              className="w-64 mt-2 rounded-none bg-gray-700 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
+              className="w-full rounded-none bg-gray-700 px-4 py-2 text-white font-semibold hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
             >
               Log in
             </button>
           </div>
-          <div className="mt-3">
+          <div className="mt-4 text-center">
             <p>Create an Account</p>
-            <strong><Link to="/auth/Register">Sign in</Link></strong>
-          
+            <Link
+              to="/auth/Register"
+              className="text-teal-600 hover:underline font-semibold"
+            >
+              Sign in
+            </Link>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

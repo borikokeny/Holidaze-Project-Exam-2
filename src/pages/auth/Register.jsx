@@ -46,21 +46,28 @@ function RegisterForm() {
   };
 
   return (
-    <div className="flex justify-center w-3/5 font-main">
-      <div className="flex justify-around">
-        <img src={Santorini} className="w-4/5 h-90 pb-3 mt-3" />
-      </div>
-      <form onSubmit={registerFormListener} className="flex mt-3 mb-3 pe-8">
-        <div className="border p-6">
+    <div className="font-main w-full max-w-6xl mx-auto p-4">
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex justify-center md:w-1/2">
+          <img
+            src={Santorini}
+            className="w-full max-w-lg h-auto rounded-none shadow-md"
+            alt="Santorini"
+          />
+        </div>
+        <form
+          onSubmit={registerFormListener}
+          className="bg-white border rounded-none shadow-lg p-6 w-full md:w-1/2"
+        >
           <input
             type="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
             pattern="^[\w\s]+$"
-            title="Username can only contain upper and lower case letters, numbers and underscore. Example: myUser_123"
+            title="Username can only contain upper and lower case letters, numbers, and underscores. Example: myUser_123"
             placeholder="Name"
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            className="ps-2 block w-full rounded-none mb-3 border border-gray-300 py-2 text-gray-900 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm"
           />
           <input
             type="email"
@@ -72,17 +79,17 @@ function RegisterForm() {
             pattern="^[\w\-.]+@stud\.?noroff\.no$"
             title="Only @stud.noroff.no domains are allowed"
             placeholder="Email"
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            className="ps-2 block w-full rounded-none mb-3 border border-gray-300 py-2 text-gray-900 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm"
           />
           <input
-            type="Password"
+            type="password"
             value={formData.password}
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
             }
             required
             placeholder="Password"
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            className="ps-2 block w-full rounded-none mb-3 border border-gray-300 py-2 text-gray-900 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm"
           />
           <input
             type="url"
@@ -90,14 +97,14 @@ function RegisterForm() {
             onChange={(e) =>
               setFormData({ ...formData, avatar: e.target.value })
             }
-            placeholder="Avatar url"
-            className="ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+            placeholder="Avatar URL"
+            className="ps-2 block w-full rounded-none mb-3 border border-gray-300 py-2 text-gray-900 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm"
           />
-          <p className="text-gray-700 text-wrap w-96">
-            For booking purposes only, please choose the 'Customer' option. If
-            you wish to add a Venue, please select the 'Manager' option.
+          <p className="text-gray-700 text-sm mb-3">
+            For booking purposes only, please choose the "Customer" option. If
+            you wish to add a venue, please select the "Manager" option.
           </p>
-          <div className="flex justify-around mt-3">
+          <div className="flex justify-between gap-4">
             <button
               type="button"
               onClick={() => {
@@ -107,10 +114,10 @@ function RegisterForm() {
                   venueManager: false,
                 }));
               }}
-              className={`w-32 mt-2 rounded-none px-3 py-2 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+              className={`w-full rounded-none px-4 py-2 font-semibold text-white ${
                 customerAccount
-                  ? "bg-teal-800 text-white"
-                  : "bg-teal-500 text-white hover:bg-teal-800"
+                  ? "bg-teal-800"
+                  : "bg-teal-500 hover:bg-teal-800"
               }`}
             >
               Customer
@@ -124,31 +131,33 @@ function RegisterForm() {
                   venueManager: true,
                 }));
               }}
-              className={`w-32 mt-2 rounded-none px-3 py-2 text-base font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+              className={`w-full rounded-none px-4 py-2 font-semibold text-white ${
                 formData.venueManager
-                  ? "bg-teal-800 text-white"
-                  : "bg-teal-500 text-white hover:bg-teal-800"
+                  ? "bg-teal-800"
+                  : "bg-teal-500 hover:bg-teal-800"
               }`}
-            > Manager
-            </button>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="w-full mt-6 rounded-none bg-gray-700 px-3 py-2 text-base font-semibold text-white shadow-sm hover:bg-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
             >
-              Sign in
+              Manager
             </button>
           </div>
-          <div className="mt-3">
-            <p>Already Have an Account?</p>
-            <strong><Link to="/auth/Login">Log in</Link></strong>
-          
+          <button
+            type="submit"
+            className="w-full mt-6 rounded-none bg-gray-700 px-4 py-2 text-white font-semibold hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          >
+            Sign in
+          </button>
+          <div className="mt-4 text-center">
+            <p>Already have an account?</p>
+            <Link
+              to="/auth/Login"
+              className="text-teal-600 hover:underline font-semibold"
+            >
+              Log in
+            </Link>
           </div>
-          {error && <p className="text-red-500">{error}</p>}
-        </div>
-      </form>
+          {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
+        </form>
+      </div>
     </div>
   );
 }
