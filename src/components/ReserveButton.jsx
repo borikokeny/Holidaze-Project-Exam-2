@@ -25,7 +25,7 @@ const ReserveButton = ({ onReserve }) => {
     <>
       <button
         onClick={handleReserveClick}
-        className="p-2 bg-gray-700 text-white rounded hover:bg-gray-900 w-full"
+        className="p-2 bg-gray-700 text-white rounded-none hover:bg-gray-900 w-full"
       >
         Reserve
       </button>
