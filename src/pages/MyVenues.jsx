@@ -86,7 +86,8 @@ function MyVenues() {
                 {venue.bookings.map((booking) => {
                    const preparedData = getPreparedData(booking);
                    return (
-                    <li key={booking.id}>
+                    <li key={booking.id} className="mt-2">
+                       <hr className="border-t-2 border-gray-300 mb-1" />
                     <span>Booked by: {booking.customer.name}</span> – From: {preparedData.dateFrom} to {preparedData.dateTo} (
                     {booking.guests} guests)
                   </li>

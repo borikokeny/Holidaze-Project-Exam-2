@@ -25,7 +25,7 @@ function Sidebar() {
   }, [user]);
 
   return (
-    <aside className="flex flex-col flex-shrink-0 p-4 h-screen w-48">
+    <aside className="hidden md:flex flex-col flex-shrink-0 p-4 h-screen w-48">
       <ul className="flex font-nav  flex-col space-y-2">
         <li>
           <div className="mt-auto ms-8">
@@ -33,11 +33,6 @@ function Sidebar() {
               href="#"
               className="flex items-center p-2 ps-7 text-gray-900 no-underline hover:bg-gray-200 rounded-md"
             >
-              {/* <img
-                src="https://github.com/mdo.png"
-                alt="User avatar"
-                className="w-8 h-8 rounded-full mr-3"
-              /> */}
             </div>
           </div>
           <Link
@@ -52,7 +47,7 @@ function Sidebar() {
             to="/MyBookings"
             className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
           >
-            My bookings
+            My Bookings
           </Link>
         </li>
         <li>
@@ -61,11 +56,11 @@ function Sidebar() {
               to="/MyVenues"
               className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
             >
-              My venues
+              My Venues
             </Link>
           )}
         </li>
-        <li>
+        <li className="-ms-5">
           <AddAVenueButton />
         </li>
         <li>
