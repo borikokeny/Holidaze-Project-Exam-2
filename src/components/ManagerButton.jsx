@@ -16,13 +16,13 @@ const ManagerButton = () => {
   }
 
   if (user.venueManager === true) {
-    return <p className="flex items-center text-gray-700">I am a Venue Manager</p>;
+    return <p className="flex items-center text-teal-500">Venue Manager</p>;
   }
 
   return (
     <button
     onClick={upgradeToManager}
-    className="p-2 bg-red-700 text-white rounded hover:bg-orange-300"
+    className="p-2 mt-2 w-full bg-teal-600 text-white rounded-none hover:bg-black"
     >
       Turn me to Venue Manager
     </button>
