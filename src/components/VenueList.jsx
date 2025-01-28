@@ -16,7 +16,7 @@ export default function VenueList({ venues }) {
       {venues.map((venue) => {
         const { id, name, media, price, location } = venue;
         return (
-          <div key={id} className="flex justify-center">
+          <div key={id} className="md:flex justify-center">
             <Link to={`/venuePage/${id}`} className="w-full max-w-xs">
               <div className="card bg-white rounded-none shadow-lg overflow-hidden">
                 <div className="image-container relative overflow-hidden">

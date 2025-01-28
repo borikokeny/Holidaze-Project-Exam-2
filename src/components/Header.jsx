@@ -27,9 +27,9 @@ export default function Header({ searchValue, setSearchValue }) {
 
   return (
     <header className="shadow-md bg-white">
-      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between py-4 gap-4">
+      <div className="container  px-4 flex flex-col md:flex-row items-center justify-between py-4 gap-4">
         <Link to="/" className="flex-shrink-0">
-          <img src={Logo} alt="Logo" className="w-48 sm:w-56 md:w-64" />
+          <img src={Logo} alt="Logo" className="w-96 sm:w-56 md:w-64" />
         </Link>
 
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
@@ -39,7 +39,7 @@ export default function Header({ searchValue, setSearchValue }) {
           <li>
             <Link
               to="/ProfilePage"
-              className="p-2 text-gray-700 rounded-md hover:bg-gray-200"
+              className="p-2 text-gray-700 rounded-none font-medium hover:bg-gray-200"
             >
               My Profile
             </Link>
@@ -47,7 +47,7 @@ export default function Header({ searchValue, setSearchValue }) {
           <li>
             <Link
               to="/MyBookings"
-              className="p-2 text-gray-700 rounded-md hover:bg-gray-200"
+              className="p-2 text-gray-700 rounded-none font-medium hover:bg-gray-200"
             >
               My Bookings
             </Link>
@@ -57,7 +57,7 @@ export default function Header({ searchValue, setSearchValue }) {
               profile?.data && (
                 <Link
                   to="/MyVenues"
-                  className="p-2 text-gray-700 rounded-md hover:bg-gray-200"
+                  className="p-2 text-gray-700 rounded-none font-medium hover:bg-gray-200"
                 >
                   My Venues
                 </Link>
@@ -65,13 +65,13 @@ export default function Header({ searchValue, setSearchValue }) {
             ) : (
               <Link
                 to="/auth/Login"
-                className="p-2 text-gray-700 rounded-md hover:bg-gray-200"
+                className="p-2 text-gray-700 rounded-none font-medium hover:bg-gray-200"
               >
                 Log In
               </Link>
             )}
           </li>
-          <li className="-mt-2 -ms-9">
+          <li className="-mt-2 -ms-9 font-medium">
             <AddAVenueButton />
           </li>
         </ul>

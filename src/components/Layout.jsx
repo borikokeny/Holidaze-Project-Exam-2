@@ -9,7 +9,7 @@ function MainLayout() {
   return (
     <div id="main-container" className="min-h-screen flex flex-col">
       <Header searchValue={searchValue} setSearchValue={setSearchValue} />
-      <div className="flex flex-1">
+      <div className="md:flex flex-1">
         <Sidebar />
         <div className="flex-1 p-4">
           <Outlet context={{ searchValue, setSearchValue }} />

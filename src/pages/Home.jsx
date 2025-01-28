@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <div id="main-container font-main">
-      <main className="shadow-md p-4">
+      <main className="py-4">
         {searchValue ? (
           <>
             <h2 className="text-xl font-bold mb-4">Search Results</h2>

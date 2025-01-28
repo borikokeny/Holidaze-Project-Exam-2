@@ -25,8 +25,8 @@ function Sidebar() {
   }, [user]);
 
   return (
-    <aside className="hidden md:flex flex-col flex-shrink-0 p-4 h-screen w-48">
-      <ul className="flex font-nav  flex-col space-y-2">
+    <aside className="hidden shadow-md md:flex flex-col flex-shrink-0 p-4 h-screen w-48">
+      <ul className="flex font-nav flex-col space-y-2">
         <li>
           <div className="mt-auto ms-8">
             <div
