@@ -52,10 +52,10 @@ const AddAVenueButton = () => {
   return (
     <>
       <Link
-        className="flex items-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
+        className="grid text-center p-2 ps-10 text-gray-700 rounded-md hover:bg-gray-200"
         onClick={handleVenueClick}
       >
-        Add a venue
+        Add a Venue
       </Link>
 
       {modalContent && (
