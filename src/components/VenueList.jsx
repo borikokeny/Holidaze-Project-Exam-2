@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Media from "./Media";
 import { LuMapPin } from "react-icons/lu";
 import { getCountries } from "./Countries";
+import defaultImage from "../images/images.png";
 
 export default function VenueList({ venues }) {
   if (!venues || venues.length === 0) {
@@ -22,7 +23,7 @@ export default function VenueList({ venues }) {
                 <div className="image-container relative overflow-hidden">
                   {media.length === 0 ? (
                     <img
-                      src="src/images/images.png"
+                      src={defaultImage}
                       alt="default"
                       className="w-full h-48 object-cover"
                     />
