@@ -26,7 +26,7 @@ function BookingForm({ venue }) {
           const daysArray = [];
           while (startDate <= endDate) {
             daysArray.push(new Date(startDate));
-            startDate.setDate(startDate.getDate()+1);
+            startDate.setDate(startDate.getDate() + 1);
           }
           return daysArray;
         });
@@ -70,48 +70,48 @@ function BookingForm({ venue }) {
   };
 
   return (
-    <div>
-      <div className="flex flex-row mb-3">
-        <p className="text-xl text-stone-600 me-6">
-          {price} NOK <span className="font-normal"> / night</span>
-        </p>
-        <p className="text-xl text-stone-600">Max guests: {maxGuests} person</p>
-      </div>
-      <div className="w-2/3">
-        <form>
-          <div className="flex justify-stretch">
-            <label>
+    <div className="w-full">
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col sm:flex-row justify-between items-center">
+          <p className="text-xl text-stone-600">
+            {price} NOK <span className="font-normal"> / night</span>
+          </p>
+          <p className="text-xl text-stone-600">
+            Max guests: {maxGuests} person
+          </p>
+        </div>
+        <form className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <label className="flex flex-col text-sm md:text-base">
               Check in
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 placeholderText="Select date"
-                className="ms-2 ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+                className="ps-2 mt-2 block w-full rounded-none border border-gray-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm md:text-base"
                 excludeDates={bookedDays}
                 minDate={new Date()}
               />
             </label>
-            <label className="ms-10">
+            <label className="flex flex-col text-sm md:text-base">
               Check out
               <DatePicker
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 placeholderText="Select date"
-                className="ms-2 ps-2 block w-full rounded-none mb-2 border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:shadow-xl sm:text-sm sm:leading-6"
+                className="ps-2 mt-2 block w-full rounded-none border border-gray-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm md:text-base"
                 excludeDates={bookedDays}
                 minDate={startDate || new Date()}
               />
             </label>
           </div>
-
-          <label>
-            Number of guests
+          <label className="block">
             <CountGuests maxGuests={maxGuests} onChange={handleGuests} />
           </label>
         </form>
         <ReserveButton onReserve={bookingFormListener} />
       </div>
-      <div className="mt-3">
+      <div className="mt-6">
         <p>
           Check-in Date:{" "}
           {startDate ? startDate.toLocaleDateString() : "Not selected"}
