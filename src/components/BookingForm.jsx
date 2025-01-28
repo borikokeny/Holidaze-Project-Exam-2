@@ -59,6 +59,21 @@ function BookingForm({ venue }) {
       venueId: venue.id,
     };
 
+    const totalPrice = handlePrice();
+
+    const confirmation = window.confirm(
+      `Please confirm your booking:\n\n` +
+        `Check-in: ${new Date(preparedData.dateFrom).toLocaleDateString()}\n` +
+        `Check-out: ${new Date(preparedData.dateTo).toLocaleDateString()}\n` +
+        `Guests: ${preparedData.guests}\n` +
+        `Total Price: ${totalPrice} NOK\n\n` +
+        `Do you want to proceed?`
+    );
+  
+    if (!confirmation) {
+      alert("Booking cancelled.");
+      return;
+    } 
     try {
       await addBooking(preparedData);
       console.log("Booking successful with data:", preparedData);
