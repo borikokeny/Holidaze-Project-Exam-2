@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Media from "./Media";
 import { LuMapPin } from "react-icons/lu";
-import { getCountries } from "./Countries";
+import { getCountries, venueNames } from "./Countries";
 import defaultImage from "../images/images.png";
 
 export default function VenueList({ venues }) {
@@ -36,7 +36,7 @@ export default function VenueList({ venues }) {
                 </div>
                 <div className="p-4 text-gray-800">
                   <h1 className="font-semibold text-base text-nowrap md:text-lg">
-                    {name}
+                    {name || venueNames}
                   </h1>
                   <div className="flex items-center text-sm md:text-base mt-2">
                     <LuMapPin className="mr-1" />
