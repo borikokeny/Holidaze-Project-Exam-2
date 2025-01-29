@@ -1,8 +1,9 @@
+@import 'react-date-range/dist/styles.css'; 
+@import 'react-date-range/dist/theme/default.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/*custom ccs*/
 
 .font-main {
   font-family: "Outfit", sherif ;
@@ -11,3 +12,5 @@
 .font-nav {
   font-family: "Quicksand", sherif;
 }
+
+

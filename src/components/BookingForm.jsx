@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import { viewVenue } from "../api/venue";
 import { addBooking } from "../api/booking";
 import { CountGuests } from "./GuestCounter";
-import DatePicker from "react-datepicker";
+import { DateRange } from "react-date-range";
 import ReserveButton from "./ReserveButton";
 
 function BookingForm({ venue }) {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [selectionRange, setSelectionRange] = useState({
+    startDate: new Date(),
+    endDate: new Date(),
+    key: "selection",
+  });
+
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [bookedDays, setBookedDays] = useState([]);
   const [error, setError] = useState("");
@@ -25,7 +29,7 @@ function BookingForm({ venue }) {
           const endDate = new Date(booking.dateTo);
           const daysArray = [];
           while (startDate <= endDate) {
-            daysArray.push(new Date(startDate));
+            daysArray.push(new Date(startDate).toISOString().split("T")[0]); // Normalize format
             startDate.setDate(startDate.getDate() + 1);
           }
           return daysArray;
@@ -38,42 +42,65 @@ function BookingForm({ venue }) {
     fetchBookedDays();
   }, [venue.id]);
 
-  const handleGuests = (count) => {
-    setNumberOfGuests(count);
+  const handleSelect = (ranges) => {
+    setSelectionRange({
+      startDate: ranges.selection.startDate,
+      endDate: ranges.selection.endDate,
+      key: "selection",
+    });
+  };
+
+  const validateBookingDates = (startDate, endDate) => {
+    const selectedDates = [];
+    const currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+      selectedDates.push(currentDate.toISOString().split("T")[0]);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return !selectedDates.some((date) => bookedDays.includes(date));
   };
 
   const handlePrice = () => {
-    if (!startDate || !endDate) {
-      return 0;
-    }
-    const dayDifference = endDate.getTime() - startDate.getTime();
+    const dayDifference =
+      selectionRange.endDate.getTime() - selectionRange.startDate.getTime();
     const days = Math.ceil(dayDifference / (1000 * 60 * 60 * 24));
     return days * price;
   };
 
   const bookingFormListener = async () => {
     const preparedData = {
-      dateFrom: startDate.toISOString(),
-      dateTo: endDate.toISOString(),
+      dateFrom: selectionRange.startDate.toISOString(),
+      dateTo: selectionRange.endDate.toISOString(),
       guests: numberOfGuests,
       venueId: venue.id,
     };
 
-    const totalPrice = handlePrice();
+    if (
+      !validateBookingDates(selectionRange.startDate, selectionRange.endDate)
+    ) {
+      alert(
+        "Your selected dates include unavailable days. Please choose a different range."
+      );
+      return;
+    }
 
+    const totalPrice = handlePrice();
     const confirmation = window.confirm(
       `Please confirm your booking:\n\n` +
         `Check-in: ${new Date(preparedData.dateFrom).toLocaleDateString()}\n` +
         `Check-out: ${new Date(preparedData.dateTo).toLocaleDateString()}\n` +
         `Guests: ${preparedData.guests}\n` +
         `Total Price: ${totalPrice} NOK\n\n` +
-        `Do you want to proceed?`
+        `You're almost there! Continue with this selection?`
     );
-  
+
     if (!confirmation) {
       alert("Booking cancelled.");
       return;
-    } 
+    }
+
     try {
       await addBooking(preparedData);
       console.log("Booking successful with data:", preparedData);
@@ -95,46 +122,24 @@ function BookingForm({ venue }) {
             Max guests: {maxGuests} person
           </p>
         </div>
-        <form className="space-y-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <label className="flex flex-col text-sm md:text-base">
-              Check in
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                placeholderText="Select date"
-                className="ps-2 mt-2 block w-full rounded-none border border-gray-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm md:text-base"
-                excludeDates={bookedDays}
-                minDate={new Date()}
-              />
-            </label>
-            <label className="flex flex-col text-sm md:text-base">
-              Check out
-              <DatePicker
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-                placeholderText="Select date"
-                className="ps-2 mt-2 block w-full rounded-none border border-gray-300 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm md:text-base"
-                excludeDates={bookedDays}
-                minDate={startDate || new Date()}
-              />
-            </label>
-          </div>
-          <label className="block">
-            <CountGuests maxGuests={maxGuests} onChange={handleGuests} />
-          </label>
-        </form>
+        <div className="flex justify-center">
+          <DateRange
+            ranges={[selectionRange]}
+            onChange={handleSelect}
+            minDate={new Date()}
+            disabledDates={bookedDays.map((date) => new Date(date))}
+          />
+        </div>
+        <label className="block">
+          <CountGuests maxGuests={maxGuests} onChange={setNumberOfGuests} />
+        </label>
+
         <ReserveButton onReserve={bookingFormListener} />
       </div>
+
       <div className="mt-6">
-        <p>
-          Check-in Date:{" "}
-          {startDate ? startDate.toLocaleDateString() : "Not selected"}
-        </p>
-        <p>
-          Check-out Date:{" "}
-          {endDate ? endDate.toLocaleDateString() : "Not selected"}
-        </p>
+        <p>Check-in Date: {selectionRange.startDate.toLocaleDateString()}</p>
+        <p>Check-out Date: {selectionRange.endDate.toLocaleDateString()}</p>
         <p>Guests: {numberOfGuests}</p>
         <p>Total Price: {handlePrice()} NOK</p>
       </div>

@@ -172,8 +172,10 @@ const VenueCard = ({ venue, onDeleteSuccess }) => {
               </>
             )}
           </div>
-
-          <BookingForm venue={venue} />
+        <div className="border p-4 shadow-md">
+        <BookingForm venue={venue} />
+        </div>
+        
         </div>
       </div>
       {openModal && (
