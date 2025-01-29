@@ -30,10 +30,17 @@ export default function Home() {
   if (error) return <p>Error loading venues: {error}</p>;
 
   const filteredVenues = venues.filter((venue) => {
-    const venueName = venue.name.trim().toLowerCase();
+    const venueName = (venue.name || "").trim().toLowerCase();
+    const venueCountry = (venue.location?.country || "").trim().toLowerCase();
+    const venueCity = (venue.location?.city || "").trim().toLowerCase();
     const searchValueLowerCase = searchValue.trim().toLowerCase();
 
-    return venueName.includes(searchValueLowerCase) && searchValue !== "";
+    return (
+      searchValue &&
+      (venueName.includes(searchValueLowerCase) ||
+        venueCountry.includes(searchValueLowerCase) ||
+        venueCity.includes(searchValueLowerCase))
+    );
   });
 
   return (
