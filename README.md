@@ -46,10 +46,11 @@ The project adheres to the following technical restrictions and approved resourc
 
 ### Tech Stack
 - JavaScript Framework: React (v16+)
-- CSS Frameworks: Tailwind CSS | Bootstrap 5+ | MUI 5+ | Styled Components | CSS Modules
-- Hosting: GitHub Pages | Netlify
-- Design Tools: Adobe XD | Figma | Sketch
-- Project Management: Trello | GitHub Projects
+- CSS Frameworks: Tailwind CSS | Styled Components | CSS Modules
+- Hosting: Netlify
+- Design Tools: Adobe XD 
+- Project Management: GitHub Projects
+- Backend API: Integration with Holidaze API (Noroff).
 
 <table>
   <tbody>
@@ -103,11 +104,11 @@ npm run dev
 - Venue management features are only accessible for Venue Managers.
 
 ## Contact Information
-You can contact me.
+You can contact me:
 
 <a href="https://www.linkedin.com/in/bori-kokeny-7070008a/">My LinkedIn page</a>
 
-Or you can e-mail me.
+Or you can e-mail me:
 
 bori@minerali.hu
 
