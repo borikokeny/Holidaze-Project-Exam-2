@@ -55,27 +55,27 @@ The project adheres to the following technical restrictions and approved resourc
 <table>
   <tbody>
     <tr>
-      <th>Gantt Chart</th>
+      <td>Gantt Chart</td>
       <td><a href="">Project Roadmap</a></td>
     </tr>
     <tr>
-      <th>Design Prototype</th>
+      <td>Design Prototype</td>
       <td><a href="">Adobe XD - Prototype</a></td>
     </tr>
     <tr>
-      <th>Style Guide</th>
+      <td>Style Guide</td>
       <td><a href="">Adobe XD - Style</a></td>
     </tr>
     <tr>
-      <th>Kanban Board</th>
+      <td>Kanban Board</td>
       <td><a href="">Project Board</a></td>
     </tr>
     <tr>
-      <th>Repository</th>
+      <td>Repository</td>
       <td><a href="">Repository</a></td>
     </tr>
       <tr>
-      <th>Hosted Demo</th>
+      <td>Hosted Demo</td>
       <td><a href="">Netlify DEMO</a></td>
     </tr>
   </tbody>
