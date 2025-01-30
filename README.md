@@ -30,13 +30,65 @@ This project focuses solely on the front-end development, working with the offic
 :heavy_check_mark: View upcoming **bookings** as a registered customer.
 
 ### Admin Features (Venue Manager)
-✔ Register as a **Venue Manager** (for users with a stud.noroff.no email).
-✔ Create a **new venue**.
-✔ Update details of a **venue** they manage.
-✔ Delete a **venue** they manage.
-✔ View **bookings** for their venue.
+- Register as a **Venue Manager** (for users with a stud.noroff.no email).
+- Create a **new venue**.
+- Update details of a **venue** they manage.
+- Delete a **venue** they manage.
+- View **bookings** for their venue.
 
 ### User Authentication
-✔ Register with stud.noroff.no email.
-✔ Login / Logout functionality.
-✔ Update user avatar.
+- Register with **stud.noroff.no** email.
+- Login / Logout functionality.
+- Update user avatar.
+
+## :hammer_and_wrench: Technologies & Requirements
+The project adheres to the following technical restrictions and approved resources:
+
+### Tech Stack
+- JavaScript Framework: React (v16+)
+- CSS Frameworks: Tailwind CSS | Bootstrap 5+ | MUI 5+ | Styled Components | CSS Modules
+- Hosting: GitHub Pages | Netlify
+- Design Tools: Adobe XD | Figma | Sketch
+- Project Management: Trello | GitHub Projects
+
+<table>
+  <tbody>
+    <tr>
+      <th>Gantt Chart</th>
+      <td><a href="">Project Roadmap</a></td>
+    </tr>
+    <tr>
+      <th>Design Prototype</th>
+      <td><a href="">Adobe XD - Prototype</a></td>
+    </tr>
+    <tr>
+      <th>Style Guide</th>
+      <td><a href="">Adobe XD - Style</a></td>
+    </tr>
+    <tr>
+      <th>Kanban Board</th>
+      <td><a href="">Project Board</a></td>
+    </tr>
+    <tr>
+      <th>Repository</th>
+      <td><a href="">Repository</a></td>
+    </tr>
+      <tr>
+      <th>Hosted Demo</th>
+      <td><a href="">Netlify DEMO</a></td>
+    </tr>
+  </tbody>
+</table>
+
+## :rocket: Setup & Installation
+### Prerequisites
+Before running the project, ensure you have the following installed:
+- Node.js (v16+ recommended)
+- Git
+### Clone the Repository
+```sh
+git clone https://github.com/yourusername/holidaze.git
+cd holidaze
+
+
+
