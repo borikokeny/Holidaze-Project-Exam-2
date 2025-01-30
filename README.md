@@ -21,13 +21,13 @@ This project focuses solely on the front-end development, working with the offic
 
 ## :book:  Features & User Stories
 ### Customer Features
-:heavy_check_mark: View a list of venues.
-:heavy_check_mark: Search for a specific venue.
-:heavy_check_mark: View details of a venue (by ID).
-:heavy_check_mark: View a **calendar** displaying available dates for a venue.
-:heavy_check_mark: Register as a **customer** (for users with a stud.noroff.no email).
-:heavy_check_mark: Book a venue as a registered customer.
-:heavy_check_mark: View upcoming **bookings** as a registered customer.
+- View a list of venues.
+- Search for a specific venue.
+- View details of a venue (by ID).
+- View a **calendar** displaying available dates for a venue.
+- Register as a **customer** (for users with a stud.noroff.no email).
+- Book a venue as a registered customer.
+- View upcoming **bookings** as a registered customer.
 
 ### Admin Features (Venue Manager)
 - Register as a **Venue Manager** (for users with a stud.noroff.no email).
@@ -89,6 +89,27 @@ Before running the project, ensure you have the following installed:
 ```sh
 git clone https://github.com/yourusername/holidaze.git
 cd holidaze
+```
+### Install Dependencies
+```sh
+npm install
+```
+### Run the Development Server
+```sh
+npm run dev
+```
+## :pushpin: Notes for Testers
+- Use a stud.noroff.no email to test user registration.
+- Venue management features are only accessible for Venue Managers.
+
+## Contact Information
+You can contact me.
+
+<a href="https://www.linkedin.com/in/bori-kokeny-7070008a/">My LinkedIn page</a>
+
+Or you can e-mail me.
+
+bori@minerali.hu
 
 
 
