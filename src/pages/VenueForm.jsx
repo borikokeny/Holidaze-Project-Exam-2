@@ -240,7 +240,7 @@ function VenueForm() {
           />
           <button
             type="submit"
-            className="w-full rounded-none bg-gray-700 px-4 py-2 text-white font-semibold hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full rounded-none bg-gray-700 px-4 py-2 text-white font-semibold hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             Publish Venue
           </button>

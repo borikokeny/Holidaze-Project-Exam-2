@@ -26,7 +26,7 @@ export default function Header({ searchValue, setSearchValue }) {
   }, [user]);
 
   return (
-    <header className="shadow-md bg-white sticky top-0 z-50">
+    <header className="shadow-md bg-white sticky top-0 z-50 font-nav">
       <div className="container  px-4 flex flex-col md:flex-row items-center justify-between py-4 gap-4">
         <Link to="/" className="flex-shrink-0">
           <img src={Logo} alt="Logo" className="w-96 sm:w-56 md:w-64" />

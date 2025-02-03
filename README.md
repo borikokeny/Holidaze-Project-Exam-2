@@ -55,16 +55,16 @@ The project adheres to the following technical restrictions and approved resourc
 <table>
   <tbody>
     <tr>
-      <td>Gantt Chart</td>
-      <td><a href="">Project Roadmap</a></td>
-    </tr>
-    <tr>
       <td>Design Prototype</td>
-      <td><a href="https://xd.adobe.com/view/cd944fe3-8694-4d34-b42e-13e7c64096b0-98c7/?fullscreen">Adobe XD - Prototype</a></td>
+      <td><a href="https://xd.adobe.com/view/cd944fe3-8694-4d34-b42e-13e7c64096b0-98c7/">Adobe XD - Prototype</a></td>
     </tr>
     <tr>
       <td>Style Guide</td>
-      <td><a href="">Adobe XD - Style</a></td>
+      <td><a href="https://xd.adobe.com/view/ca48dd4f-bb5e-4e19-b0b0-8d0bafaebaaf-9f1b/">Adobe XD - Style</a></td>
+    </tr>
+    <tr>
+      <td>Gantt Chart</td>
+      <td><a href="">Project Roadmap</a></td>
     </tr>
     <tr>
       <td>Kanban Board</td>
@@ -72,11 +72,11 @@ The project adheres to the following technical restrictions and approved resourc
     </tr>
     <tr>
       <td>Repository</td>
-      <td><a href="">Repository</a></td>
+      <td><a href="https://github.com/borikokeny/Holidaze-Project-Exam-2">Repository</a></td>
     </tr>
       <tr>
       <td>Hosted Demo</td>
-      <td><a href="">Netlify DEMO</a></td>
+      <td><a href="https://holidaze-rentopia.netlify.app/">Netlify DEMO</a></td>
     </tr>
   </tbody>
 </table>
