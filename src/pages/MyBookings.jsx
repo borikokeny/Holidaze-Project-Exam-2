@@ -108,10 +108,10 @@ export default function MyBookings() {
                 <p className="text-sm text-gray-600">
                   Booked Guests: {booking.guests}
                 </p>
+                <p className="text-sm text-gray-600">Booked Nights: {days}</p>
                 <p className="text-sm text-gray-600">
                   Dates: {preparedData.dateFrom} - {preparedData.dateTo}
                 </p>
-                <p className="text-sm text-gray-600">Booked Nights: {days}</p>
                 <p className="text-sm text-gray-600">
                   Total Price: {total} NOK
                 </p>

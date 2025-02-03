@@ -60,7 +60,7 @@ The project adheres to the following technical restrictions and approved resourc
     </tr>
     <tr>
       <td>Design Prototype</td>
-      <td><a href="">Adobe XD - Prototype</a></td>
+      <td><a href="https://xd.adobe.com/view/cd944fe3-8694-4d34-b42e-13e7c64096b0-98c7/?fullscreen">Adobe XD - Prototype</a></td>
     </tr>
     <tr>
       <td>Style Guide</td>

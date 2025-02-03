@@ -58,7 +58,7 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
             }
             placeholder="Email"
             required
-            className="ps-2 block w-full rounded-none mb-3 border border-gray-300 py-2 text-gray-900 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm"
+            className="ps-2 block w-full rounded-none mt-10 mb-3 border border-gray-300 py-2 text-gray-900 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm"
           />
           <input
             type="password"

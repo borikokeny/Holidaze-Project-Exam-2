@@ -67,7 +67,7 @@ function RegisterForm() {
             pattern="^[\w\s]+$"
             title="Username can only contain upper and lower case letters, numbers, and underscores. Example: myUser_123"
             placeholder="Name"
-            className="ps-2 block w-full rounded-none mb-3 border border-gray-300 py-2 text-gray-900 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm"
+            className="ps-2 mt-10 block w-full rounded-none mb-3 border border-gray-300 py-2 text-gray-900 focus:ring-2 focus:ring-teal-500 focus:outline-none sm:text-sm"
           />
           <input
             type="email"

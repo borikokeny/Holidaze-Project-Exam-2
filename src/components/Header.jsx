@@ -35,29 +35,29 @@ export default function Header({ searchValue, setSearchValue }) {
         <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       <nav className="block md:hidden container mx-auto px-4 py-2">
-        <ul className="grid grid-cols-2 gap-x-8 gap-y-4 text-center">
-          <li>
+        <ul className="grid grid-cols-2 gap-x-8 gap-y-4 mb-3 text-center">
+          <li className="border rounded-none p-3">
             <Link
               to="/ProfilePage"
-              className="p-2 text-gray-700 rounded-none font-medium hover:bg-gray-200"
+              className="p-2 text-gray-700 hover:bg-gray-200"
             >
               My Profile
             </Link>
           </li>
-          <li>
+          <li className="border rounded-none p-3">
             <Link
               to="/MyBookings"
-              className="p-2 text-gray-700 rounded-none font-medium hover:bg-gray-200"
+              className="p-2 text-gray-700 hover:bg-gray-200"
             >
               My Bookings
             </Link>
           </li>
-          <li>
+          <li className="border rounded-none p-3">
             {user ? (
               profile?.data && (
                 <Link
                   to="/MyVenues"
-                  className="p-2 text-gray-700 rounded-none font-medium hover:bg-gray-200"
+                  className="p-2 text-gray-700 rounded-none hover:bg-gray-200"
                 >
                   My Venues
                 </Link>
@@ -65,13 +65,13 @@ export default function Header({ searchValue, setSearchValue }) {
             ) : (
               <Link
                 to="/auth/Login"
-                className="p-2 text-gray-700 rounded-none font-medium hover:bg-gray-200"
+                className="text-gray-700 rounded-none hover:bg-gray-200"
               >
                 Log In
               </Link>
             )}
           </li>
-          <li className="-mt-2 -ms-9 font-medium">
+          <li className="border rounded-none p-1 pe-8">
             <AddAVenueButton />
           </li>
         </ul>

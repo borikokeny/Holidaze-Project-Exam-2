@@ -89,7 +89,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="mb-11 border rounded-md w-full sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto">
+    <div className="mb-11 border rounded-none w-full sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto font-main">
       <div className="grid justify-items-center mb-12 p-4 sm:p-6">
         <div className="w-40 sm:w-52 md:w-60 place-items-center relative">
           <img
@@ -124,7 +124,7 @@ export default function ProfilePage() {
                 />
                 <button
                   type="submit"
-                  className="rounded bg-gray-700 px-3 py-2 text-sm sm:text-base font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
+                  className="rounded-none bg-gray-700 px-3 py-2 text-sm sm:text-base font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-60"
                 >
                   Update your avatar
                 </button>
@@ -146,7 +146,7 @@ export default function ProfilePage() {
             <button
               onClick={logout}
               id="logOut"
-              className="flex justify-center mt-5 w-full p-2 bg-gray-700 text-white rounded hover:bg-gray-900"
+              className="flex justify-center mt-5 w-full p-2 bg-gray-700 text-white rounded-none hover:bg-gray-900"
             >
               Log out
             </button>

@@ -19,7 +19,7 @@ export default function SearchBar() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search venues"
-        className="p-2 font-nav border rounded-md w-full text-sm sm:text-base"
+        className="p-2 font-nav border rounded-none w-full text-sm sm:text-base"
       />
     </form>
   );
