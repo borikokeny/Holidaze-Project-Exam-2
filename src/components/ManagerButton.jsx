@@ -1,8 +1,10 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const ManagerButton = () => {
   const { user, upgradeToManager } = useAuth();
+  const navigate = useNavigate();
 
   if (!user) {
     return (
@@ -16,7 +18,9 @@ const ManagerButton = () => {
   }
 
   if (user.venueManager === true) {
-    return <p className="flex items-center text-teal-500">Venue Manager</p>;
+    navigate("/VenueForm");
+    return <p className="flex items-center text-teal-500">Congratulations! You are now a Venue Manager. You can start managing venues right away.</p>;
+    
   }
 
   return (
