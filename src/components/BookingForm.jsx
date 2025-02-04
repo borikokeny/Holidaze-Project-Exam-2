@@ -29,7 +29,7 @@ function BookingForm({ venue }) {
           const endDate = new Date(booking.dateTo);
           const daysArray = [];
           while (startDate <= endDate) {
-            daysArray.push(new Date(startDate).toISOString().split("T")[0]); // Normalize format
+            daysArray.push(new Date(startDate).toISOString().split("T")[0]);
             startDate.setDate(startDate.getDate() + 1);
           }
           return daysArray;

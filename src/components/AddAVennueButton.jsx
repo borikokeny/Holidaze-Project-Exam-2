@@ -3,7 +3,6 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import { LoginForm } from "../pages";
-// import LoginForm from "../pages/auth/login";
 import ManagerButton from "./ManagerButton";
 
 const AddAVenueButton = () => {

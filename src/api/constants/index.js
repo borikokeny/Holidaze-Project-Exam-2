@@ -3,7 +3,6 @@ export const BASE_URL = `https://v2.api.noroff.dev/holidaze`;
 export const REG_URL = `https://v2.api.noroff.dev/auth/register`;
 export const LOG_URL = `https://v2.api.noroff.dev/auth/login`;
 
-// export const VENUES_URL = `${BASE_URL}/venues?sort=created&sortOrder=asc`;
 export const VENUES_URL = `${BASE_URL}/venues`;
 
 export const BOOKINGS_URL = `${BASE_URL}/bookings`;
