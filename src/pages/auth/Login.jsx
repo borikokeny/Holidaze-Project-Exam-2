@@ -74,7 +74,7 @@ const LoginForm = ({ redirect = true, onLoginSuccess }) => {
           <div>
             <button
               type="submit"
-              className="w-full rounded-none bg-gray-700 px-4 py-2 text-white font-semibold hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full rounded-none bg-gray-700 px-4 py-2 text-white font-semibold hover:bg-black focus:outline-none focus:ring-2 focus:ring-teal-500"
             >
               Log in
             </button>
