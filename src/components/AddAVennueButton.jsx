@@ -21,7 +21,6 @@ const AddAVenueButton = () => {
             redirect={false}
             onLoginSuccess={() => {
               setModalContent(null); 
-              navigate("/VenueForm");
             }}
           />
         ),
@@ -35,7 +34,6 @@ const AddAVenueButton = () => {
         content: (
           <ManagerButton
             onUpgradeSuccess={() => {
-              console.log("Upgrade success handler called");
               setModalContent(null); 
               navigate("/VenueForm");
             }}

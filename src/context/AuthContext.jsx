@@ -65,7 +65,6 @@ export const AuthProvider = ({ children }) => {
 
       setUser(updatedProfile.data);
       localStorage.setItem("profile", JSON.stringify(updatedProfile.data));
-      console.log("User successfully upgraded to manager.");
     } catch (error) {
       console.error("Failed to upgrade user to manager:", error.message);
     }

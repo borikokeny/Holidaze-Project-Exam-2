@@ -64,11 +64,11 @@ The project adheres to the following technical restrictions and approved resourc
     </tr>
     <tr>
       <td>Gantt Chart</td>
-      <td><a href="https://github.com/users/borikokeny/projects/9/views/2">Project Roadmap</a></td>
+      <td><a href="https://github.com/users/borikokeny/projects/9/views/1?layout=table&sortedBy%5Bdirection%5D=asc&sortedBy%5BcolumnId%5D=140233371&visibleFields=%5B%22Title%22%2C%22Status%22%2C140233370%2C140233371%2C140233369%5D">Project Roadmap</a></td>
     </tr>
     <tr>
       <td>Kanban Board</td>
-      <td><a href="https://github.com/users/borikokeny/projects/9/views/1?layout=board">Project Board</a></td>
+      <td><a href="https://github.com/users/borikokeny/projects/9/views/2?layout=board">Project Board</a></td>
     </tr>
     <tr>
       <td>Repository</td>

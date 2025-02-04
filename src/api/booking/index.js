@@ -43,7 +43,6 @@ export async function viewBooking(id) {
 }
 
 export async function addBooking(formData) {
-  console.log(formData);
   try {
     const response = await fetch(`${BOOKINGS_URL}`, {
       headers: headers(),

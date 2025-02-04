@@ -103,7 +103,6 @@ function BookingForm({ venue }) {
 
     try {
       await addBooking(preparedData);
-      console.log("Booking successful with data:", preparedData);
       alert("Booking successful!");
     } catch (error) {
       console.error("Error booking venue:", error);

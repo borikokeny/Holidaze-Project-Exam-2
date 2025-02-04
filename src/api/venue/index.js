@@ -30,7 +30,6 @@ export async function viewVenue(venueId) {
 }
 
 export async function addVenue(formData) {
-  console.log("Sending data:", formData);
   try {
     const response = await fetch(`${VENUES_URL}`, {
       headers: headers(),
@@ -77,7 +76,6 @@ export async function updateVenue(venueId, formData) {
 }
 
 export async function removeVenue(venueId) {
-  console.log("Deleting venue with ID:", venueId);
   try {
     const response = await fetch(`${VENUES_URL}/${venueId}`, {
       headers: headers(),

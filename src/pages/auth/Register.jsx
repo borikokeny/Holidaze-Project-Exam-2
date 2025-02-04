@@ -30,9 +30,7 @@ function RegisterForm() {
       venueManager: formData.venueManager,
       ...(formData.avatar.trim() && { avatar: { url: formData.avatar } }),
     };
-    console.log("Payload sent to backend:", preparedData);
     try {
-      console.log("Payload:", preparedData);
       await register(preparedData);
 
       if (formData.venueManager) {

@@ -2,7 +2,6 @@ import { REG_URL } from "../constants";
 import { headers } from "../constants/headers";
 
 export async function register(formData) {
-  console.log("Sending data:", formData);
   try {
     const response = await fetch(`${REG_URL}`, {
       headers: headers(),
