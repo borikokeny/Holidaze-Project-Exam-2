@@ -25,8 +25,9 @@ function Sidebar() {
   }, [user]);
 
   return (
-    <aside className="hidden shadow-md md:flex flex-col flex-shrink-0 p-4 h-screen w-48 top-28 fixed left-0 z-50 bg-white">
-      <ul className="flex font-nav flex-col space-y-2">
+    <div className="flex min-h-screen">
+    <aside className="hidden shadow-md md:flex flex-col flex-shrink-0 p-4 w-48 bg-white sticky top-28 h-[calc(100vh-7rem)]">
+      <ul className="flex font-nav flex-col flex-grow space-y-2">
         <li>
           <div className="mt-auto ms-8">
             <div
@@ -83,7 +84,7 @@ function Sidebar() {
             </Link>
           )}
         </li>
-        <li>
+        <li className="mt-auto">
           {user && (
             <Link
               onClick={logout}
@@ -96,6 +97,8 @@ function Sidebar() {
         </li>
       </ul>
     </aside>
+    </div>
+   
   );
 }
 

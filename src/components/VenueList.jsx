@@ -35,7 +35,7 @@ export default function VenueList({ venues }) {
                   )}
                 </div>
                 <div className="p-4 text-gray-800">
-                  <h1 className="font-semibold text-base text-nowrap md:text-lg">
+                  <h1 className="font-semibold text-base md:text-lg">
                     {name || venueNames}
                   </h1>
                   <div className="flex items-center text-sm md:text-base mt-2">
