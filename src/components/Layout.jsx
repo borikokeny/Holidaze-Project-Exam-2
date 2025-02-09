@@ -11,7 +11,7 @@ function MainLayout() {
       <Header searchValue={searchValue} setSearchValue={setSearchValue} />
       <div className="md:flex flex-1">
         <Sidebar />
-        <div className="flex-1 p-4 md:ml-48">
+        <div className="flex-1 p-4">
           <Outlet context={{ searchValue, setSearchValue }} />
         </div>
       </div>
