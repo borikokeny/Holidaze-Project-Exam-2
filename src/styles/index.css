@@ -12,3 +12,18 @@
 .font-nav {
   font-family: "Quicksand", sherif;
 }
+
+@media (max-width: 765px) {
+  .header-top {
+    height: 13rem;
+  }
+  .min-h-screen {
+    min-height: 8vh;
+  }
+}
+
+@media (max-width: 991px) {
+  .searchbar {
+    margin-right: 20px;
+  }
+}

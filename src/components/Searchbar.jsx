@@ -13,7 +13,7 @@ export default function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSearch} className="w-full">
+    <form onSubmit={handleSearch} className="w-full searchbar">
       <input
         type="text"
         value={query}
