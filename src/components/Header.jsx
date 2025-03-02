@@ -43,7 +43,7 @@ export default function Header({ searchValue, setSearchValue }) {
       <div className="container px-4 flex flex-col md:flex-row items-center justify-between py-4 gap-4"> 
         <div className="flex items-center gap-4">
         <Link to="/" className="flex-shrink-0">
-          <img src={Logo} alt="Logo" className="w-96 sm:w-56 md:w-64" />
+          <img src={Logo} alt="Logo" className="w-96 sm:w-56 md:w-64 logo" />
         </Link>
         <button
           id="menu-button"
