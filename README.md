@@ -103,6 +103,9 @@ npm run dev
 - Use a stud.noroff.no email to test user registration.
 - Venue management features are only accessible for Venue Managers.
 
+## Contributing
+If you want to contribute to the project and make it better, your help is very welcome.
+
 ## Contact Information
 You can contact me:
 
