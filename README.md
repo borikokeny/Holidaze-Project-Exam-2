@@ -88,8 +88,7 @@ Before running the project, ensure you have the following installed:
 - Git
 ### Clone the Repository
 ```sh
-git clone https://github.com/yourusername/holidaze.git
-cd holidaze
+git clone https://github.com/borikokeny/holidaze.git
 ```
 ### Install Dependencies
 ```sh
